@@ -15,4 +15,5 @@ export const AppButton = styled(Button)({
     background: secondary,
   },
   width: 80,
+  transition: "0.5s",
 });

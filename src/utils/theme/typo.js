@@ -10,9 +10,10 @@ export const Appmainheading = styled(Typography)({
 
 export const Appheading = styled(Typography)({
   fontFamily: "Inter",
-  fontWeight: 600,
-  fontSize: "15.91px",
-  lineHeight: "26.87px",
+  fontWeight: 400,
+  fontSize: "40px",
+  lineHeight: "50px",
+  color: "black",
 });
 
 export const Applabel = styled(Typography)({
@@ -28,6 +29,7 @@ export const Appfont = styled(Typography)({
   fontWeight: 500,
   fontSize: "16px",
   lineHeight: "30px",
+  color: "black",
 });
 
 export const Appcaption = styled(Typography)({
