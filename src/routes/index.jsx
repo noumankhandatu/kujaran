@@ -7,6 +7,8 @@ import ArenaPage from "../pages/arena";
 import ArenaDetails from "../pages/arena-details";
 import FirstEvent from "./../pages/first-event/index";
 import SecondEvent from "../pages/second-event";
+import ThirdEvent from "../pages/third-event";
+import FourthEvent from "../pages/fourth-event";
 
 const AppRouting = () => {
   return (
@@ -60,6 +62,25 @@ const AppRouting = () => {
             </Layout>
           }
         />
+        <Route
+          exact
+          path={`${ROUTE_PATH.THIRD_EVENT}`}
+          element={
+            <Layout>
+              <ThirdEvent />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.FOURTH_EVENT}`}
+          element={
+            <Layout>
+              <FourthEvent />
+            </Layout>
+          }
+        />
+
         <Route exact path={"*"} element={<NotFoundPage />} />
       </Routes>
     </Router>
