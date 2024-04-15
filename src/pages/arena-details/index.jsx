@@ -4,7 +4,7 @@ import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 
 const grey = "#ECECEC";
-const EventDetails = () => {
+const ArenaDetails = () => {
   return (
     <Div>
       <Div sx={{ border: "1px solid black", background: grey }}>
@@ -109,7 +109,7 @@ const EventDetails = () => {
   );
 };
 
-export default EventDetails;
+export default ArenaDetails;
 
 const flexer = {
   display: "flex",

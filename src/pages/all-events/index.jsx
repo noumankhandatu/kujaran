@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Appfont } from "../../utils/theme/typo";
 import { AppButton } from "../../components/atoms/AppButton";
 import { Link } from "react-router-dom";
+import { ROUTE_PATH } from "../../utils/route-paths";
 
 const AllEventsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,7 +92,7 @@ export default AllEventsPage;
 
 const EventCard = ({ id }) => {
   return (
-    <Link to={"/event/" + id}>
+    <Link to={`${ROUTE_PATH.ARENA_ID}/${id}`}>
       <Div
         sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
       >

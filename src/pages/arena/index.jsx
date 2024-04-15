@@ -9,7 +9,7 @@ import ham from "../../assets/svgs/hamburger.svg";
 import { useState } from "react";
 import { ROUTE_PATH } from "../../utils/route-paths";
 
-const EventPage = () => {
+const ArenaPage = () => {
   const [expandedItem, setExpandedItem] = useState(null);
 
   return (
@@ -95,7 +95,7 @@ const EventPage = () => {
                 >
                   <Appfont sx={{ ml: 1 }}>Arena {items}</Appfont>
                   <Div sx={{ pt: 2, mr: 1 }}>
-                    <Link to={ROUTE_PATH.EVENT_DETAILS}>
+                    <Link to={ROUTE_PATH.ARENA_DETAILS}>
                       <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
                     </Link>
                   </Div>{" "}
@@ -112,22 +112,20 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default ArenaPage;
 
-const EventCard = ({ id }) => {
+const EventCard = () => {
   return (
-    <Link to={"/event/" + id}>
-      <Div
-        sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
-      >
-        <img src="/eventlogo.png" alt="" />
-        <Div>
-          <Appheading>Event Name</Appheading>
-          <Appfont>Event Location</Appfont>
-          <Appfont>Event Startdate - Event Enddate </Appfont>
-        </Div>
+    <Div
+      sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
+    >
+      <img src="/eventlogo.png" alt="" />
+      <Div>
+        <Appheading>Event Name</Appheading>
+        <Appfont>Event Location</Appfont>
+        <Appfont>Event Startdate - Event Enddate </Appfont>
       </Div>
-    </Link>
+    </Div>
   );
 };
 

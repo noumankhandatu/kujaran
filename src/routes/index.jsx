@@ -3,8 +3,8 @@ import AllEventsPage from "../pages/all-events";
 import NotFoundPage from "./../pages/404/index";
 import Layout from "../components/molecules/layout";
 import { ROUTE_PATH } from "../utils/route-paths";
-import EventPage from "../pages/event";
-import EventDetails from "./../pages/event-details/index";
+import ArenaPage from "../pages/arena";
+import ArenaDetails from "../pages/arena-details";
 
 const AppRouting = () => {
   return (
@@ -25,19 +25,19 @@ const AppRouting = () => {
 
         <Route
           exact
-          path={`${ROUTE_PATH.EVENT_ID}/:eventId`}
+          path={`${ROUTE_PATH.ARENA_ID}/:id`}
           element={
             <Layout>
-              <EventPage />
+              <ArenaPage />
             </Layout>
           }
         />
         <Route
           exact
-          path={`${ROUTE_PATH.EVENT_DETAILS}`}
+          path={`${ROUTE_PATH.ARENA_DETAILS}`}
           element={
             <Layout>
-              <EventDetails />
+              <ArenaDetails />
             </Layout>
           }
         />
