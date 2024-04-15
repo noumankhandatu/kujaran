@@ -2,6 +2,8 @@ import Grid from "@mui/material/Grid";
 import { Appfont, Appheading } from "./../../utils/theme/typo";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
+import { Link } from "react-router-dom";
+import { ROUTE_PATH } from "../../utils/route-paths";
 
 const grey = "#ECECEC";
 const ArenaDetails = () => {
@@ -69,40 +71,36 @@ const ArenaDetails = () => {
       <Div height={30} />
       {[1, 2, 3, 4, 5, 6].map((items) => {
         return (
-          <Grid
-            key={items}
-            container
-            spacing={1}
-            sx={{ border: "1px solid black", mb: 1, position: "relative", background: grey }}
-          >
-            <Grid sx={{ border: "1px solid black" }} item xs={12} lg={6}>
-              <Div sx={{ ...flexer }}>
-                <Div>
-                  <Appfont>
-                    {" "}
-                    <span style={{ position: "absolute", left: 40 }}>1</span> Rider name
-                  </Appfont>
-                  <Appfont>Horse name</Appfont>
-                  <Appfont>Horse number</Appfont>
+          <Link to={ROUTE_PATH.FIRST_EVENT} key={items}>
+            <Grid container spacing={1} sx={pointer}>
+              <Grid sx={{ border: "1px solid black" }} item xs={12} lg={6}>
+                <Div sx={{ ...flexer }}>
+                  <Div>
+                    <Appfont>
+                      <span style={{ position: "absolute", left: 40 }}>1</span> Rider name
+                    </Appfont>
+                    <Appfont>Horse name</Appfont>
+                    <Appfont>Horse number</Appfont>
+                  </Div>
+                  <Div>
+                    <Appfont>xx/xx/xx</Appfont>
+                  </Div>
                 </Div>
-                <Div>
-                  <Appfont>xx/xx/xx</Appfont>
+              </Grid>
+              <Grid sx={{ border: "1px solid black" }} item xs={12} lg={6}>
+                <Div sx={flexer}>
+                  <Div>
+                    <Appfont>Rider name</Appfont>
+                    <Appfont>Horse name</Appfont>
+                    <Appfont>Horse number</Appfont>
+                  </Div>
+                  <Div>
+                    <Appfont>xx/xx/xx</Appfont>
+                  </Div>
                 </Div>
-              </Div>
+              </Grid>
             </Grid>
-            <Grid sx={{ border: "1px solid black" }} item xs={12} lg={6}>
-              <Div sx={flexer}>
-                <Div>
-                  <Appfont>Rider name</Appfont>
-                  <Appfont>Horse name</Appfont>
-                  <Appfont>Horse number</Appfont>
-                </Div>
-                <Div>
-                  <Appfont>xx/xx/xx</Appfont>
-                </Div>
-              </Div>
-            </Grid>
-          </Grid>
+          </Link>
         );
       })}
     </Div>
@@ -122,4 +120,12 @@ const flexer = {
     lg: 8,
     xs: 1,
   },
+};
+
+const pointer = {
+  border: "1px solid black",
+  mb: 1,
+  position: "relative",
+  background: grey,
+  cursor: "pointer",
 };

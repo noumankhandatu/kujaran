@@ -5,6 +5,7 @@ import Layout from "../components/molecules/layout";
 import { ROUTE_PATH } from "../utils/route-paths";
 import ArenaPage from "../pages/arena";
 import ArenaDetails from "../pages/arena-details";
+import FirstEvent from "./../pages/first-event/index";
 
 const AppRouting = () => {
   return (
@@ -22,7 +23,6 @@ const AppRouting = () => {
             }
           />
         ))}
-
         <Route
           exact
           path={`${ROUTE_PATH.ARENA_ID}/:id`}
@@ -41,6 +41,17 @@ const AppRouting = () => {
             </Layout>
           }
         />
+
+        <Route
+          exact
+          path={`${ROUTE_PATH.FIRST_EVENT}`}
+          element={
+            <Layout>
+              <FirstEvent />
+            </Layout>
+          }
+        />
+
         <Route exact path={"*"} element={<NotFoundPage />} />
       </Routes>
     </Router>

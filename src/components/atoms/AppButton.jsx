@@ -14,6 +14,6 @@ export const AppButton = styled(Button)({
   "&:hover": {
     background: secondary,
   },
-  width: 80,
+  width: 100,
   transition: "0.5s",
 });

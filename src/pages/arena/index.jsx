@@ -71,7 +71,7 @@ const ArenaPage = () => {
       </Div>
       {[1, 2, 3, 4].map((items) => {
         return (
-          <div key={items}>
+          <Div key={items}>
             <Div
               onClick={() => setExpandedItem(expandedItem === items ? null : items)}
               sx={{
@@ -105,7 +105,7 @@ const ArenaPage = () => {
                 <Appfont sx={{ pb: 2, ml: 1 }}>Class Starttime </Appfont>
               </Div>
             )}
-          </div>
+          </Div>
         );
       })}
     </div>
