@@ -7,6 +7,7 @@ import LaptopMacIcon from "@mui/icons-material/LaptopMac";
 import { AppButton } from "../../components/atoms/AppButton";
 import ham from "../../assets/svgs/hamburger.svg";
 import { useState } from "react";
+import { ROUTE_PATH } from "../../utils/route-paths";
 
 const EventPage = () => {
   const [expandedItem, setExpandedItem] = useState(null);
@@ -94,7 +95,9 @@ const EventPage = () => {
                 >
                   <Appfont sx={{ ml: 1 }}>Arena {items}</Appfont>
                   <Div sx={{ pt: 2, mr: 1 }}>
-                    <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
+                    <Link to={ROUTE_PATH.EVENT_DETAILS}>
+                      <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
+                    </Link>
                   </Div>{" "}
                 </Div>
                 <Appfont sx={{ ml: 1 }}>Class Name </Appfont>

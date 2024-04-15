@@ -4,6 +4,7 @@ import NotFoundPage from "./../pages/404/index";
 import Layout from "../components/molecules/layout";
 import { ROUTE_PATH } from "../utils/route-paths";
 import EventPage from "../pages/event";
+import EventDetails from "./../pages/event-details/index";
 
 const AppRouting = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouting = () => {
             }
           />
         ))}
+
         <Route
           exact
           path={`${ROUTE_PATH.EVENT_ID}/:eventId`}
@@ -30,7 +32,15 @@ const AppRouting = () => {
             </Layout>
           }
         />
-
+        <Route
+          exact
+          path={`${ROUTE_PATH.EVENT_DETAILS}`}
+          element={
+            <Layout>
+              <EventDetails />
+            </Layout>
+          }
+        />
         <Route exact path={"*"} element={<NotFoundPage />} />
       </Routes>
     </Router>

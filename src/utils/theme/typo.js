@@ -1,13 +1,6 @@
 import { styled } from "@mui/system";
 import Typography from "@mui/material/Typography";
 
-export const Appmainheading = styled(Typography)({
-  fontFamily: "Inter",
-  fontWeight: 700,
-  fontSize: "24px",
-  lineHeight: "31.2px",
-});
-
 export const Appheading = styled(Typography)({
   fontFamily: "Inter",
   fontWeight: 400,
