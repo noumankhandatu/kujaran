@@ -7,4 +7,10 @@ export const ROUTE_PATH = {
   THIRD_EVENT: "/third_event",
   FOURTH_EVENT: "/fourth_event",
   FIFTH_EVENT: "/fifth_event",
+
+  RIDER_PROFILE: "/rider_profile",
+  HORSE_PROFILE: "/horse_profile",
+  STABLE_PROFILE: "/stable_profile",
+
+  SIGNUP_PAGES: "/signup_pages",
 };

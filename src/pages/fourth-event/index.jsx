@@ -22,7 +22,7 @@ const FourthEvent = () => {
           <Appfont>Class Starttime</Appfont>
           <Appfont>Class Number of Participants</Appfont>
         </Div>
-        <Link to={ROUTE_PATH.SECOND_EVENT}>
+        <Link to={ROUTE_PATH.FIFTH_EVENT}>
           <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
         </Link>
       </Div>

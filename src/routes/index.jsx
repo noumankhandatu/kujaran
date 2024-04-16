@@ -9,6 +9,11 @@ import FirstEvent from "./../pages/first-event/index";
 import SecondEvent from "../pages/second-event";
 import ThirdEvent from "../pages/third-event";
 import FourthEvent from "../pages/fourth-event";
+import FifthEvent from "../pages/fifth-event";
+import RiderProfile from "../pages/rider-profile";
+import HorseProfile from "../pages/horse-profile";
+import StableProfile from "../pages/stable-profile";
+import SignUpPages from "../pages/auth";
 
 const AppRouting = () => {
   return (
@@ -77,6 +82,51 @@ const AppRouting = () => {
           element={
             <Layout>
               <FourthEvent />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.FIFTH_EVENT}`}
+          element={
+            <Layout>
+              <FifthEvent />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.RIDER_PROFILE}`}
+          element={
+            <Layout>
+              <RiderProfile />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.HORSE_PROFILE}`}
+          element={
+            <Layout>
+              <HorseProfile />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.STABLE_PROFILE}`}
+          element={
+            <Layout>
+              <StableProfile />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.SIGNUP_PAGES}`}
+          element={
+            <Layout>
+              <SignUpPages />
             </Layout>
           }
         />
