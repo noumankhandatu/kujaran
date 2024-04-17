@@ -9,11 +9,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import { ROUTE_PATH } from "../../utils/route-paths";
 
 const RiderSignUp = () => {
   return (
     <Container
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, width: 600 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 2,
+        width: {
+          lg: 600,
+          xs: "100%",
+        },
+      }}
     >
       <Avatar src="/avatar.svg" alt="Avatar" sx={{ width: 80, height: 80, marginBottom: 2 }} />
       <Typography variant="h5" gutterBottom>
@@ -73,9 +84,11 @@ const RiderSignUp = () => {
           type="tel"
           required
         />
-        <Button sx={{ width: "100%" }} type="submit" variant="contained" color="primary">
-          Sign Up
-        </Button>
+       <Link to={ROUTE_PATH.ALL_EVENTS_RIDER}>
+          <Button sx={{ width: "100%" }} type="submit" variant="contained" color="primary">
+            Sign Up
+          </Button>
+        </Link>
       </form>
     </Container>
   );
