@@ -34,7 +34,7 @@ export default AllEventsSuperVisor;
 
 const EventCard = () => {
   return (
-    <Link to={ROUTE_PATH.ARENA_ID_JUDGE}>
+    <Link to={ROUTE_PATH.CREATE_EVENT_SUPERVISOR}>
       <Div
         sx={{
           display: "flex",

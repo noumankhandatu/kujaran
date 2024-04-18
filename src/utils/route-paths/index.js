@@ -26,9 +26,7 @@ export const ROUTE_PATH = {
 
   // supervisor
   ALL_EVENTS_SUPERVISOR: "/all_events_supervisor",
-  SUPERVISOR_REGISTRAION: "/supervisor_registraion",
-  ALL_EVENT_SUPERVISOR: "/all_events_supervisor",
-  ARENA_ID_SUPERVISOR: "/arena_supervisor",
+  CREATE_EVENT_SUPERVISOR: "/create_event_supervisor",
   FIRST_SUPERVISOR_EVENT: "/first_supervisor_event",
   SECOND_SUPERVISOR_EVENT: "/second_supervisore_event",
   THIRD_SUPERVISOR_EVENT: "/third_supervisor_event",

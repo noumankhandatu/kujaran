@@ -5,9 +5,9 @@ import Title from "../../../components/molecules/title";
 import { alpha } from "../../../utils/theme/colors";
 import { Appfont, Appheading } from "../../../utils/theme/typo";
 import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "./../../../utils/route-paths/index";
+import { ROUTE_PATH } from "../../../utils/route-paths/index";
 
-const JudgeFirstEvent = () => {
+const FirstEventSupervisor = () => {
   return (
     <div>
       <EventCard />
@@ -21,7 +21,7 @@ const JudgeFirstEvent = () => {
           <Appfont>Class Starttime</Appfont>
           <Appfont>Class Number of Participants</Appfont>
         </Div>
-        <Link to={ROUTE_PATH.SECOND_JUDGE_EVENT}>
+        <Link to={ROUTE_PATH.SECOND_SUPERVISOR_EVENT}>
           <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
         </Link>
       </Div>
@@ -36,7 +36,7 @@ const JudgeFirstEvent = () => {
             <Appheading>Horse Number </Appheading>
           </Grid>
           <Grid item lg={6} xs={12} container>
-            <Grid sx={{mb:2}} lg={12} xs={12}>
+            <Grid sx={{ mb: 2 }} lg={12} xs={12}>
               <Button variant="contained" size="small" sx={{ background: "#FEA500" }}>
                 E-J
               </Button>{" "}
@@ -123,19 +123,21 @@ const JudgeFirstEvent = () => {
   );
 };
 
-export default JudgeFirstEvent;
+export default FirstEventSupervisor;
 const EventCard = () => {
   return (
-    <Div
-      sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
-    >
-      <img src="/eventlogo.png" alt="" />
-      <Div>
-        <Appheading>Event Name</Appheading>
-        <Appfont>Event Location</Appfont>
-        <Appfont>Event Startdate - Event Enddate </Appfont>
+    <Link to={ROUTE_PATH.SECOND_SUPERVISOR_EVENT}>
+      <Div
+        sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
+      >
+        <img src="/eventlogo.png" alt="" />
+        <Div>
+          <Appheading>Event Name</Appheading>
+          <Appfont>Event Location</Appfont>
+          <Appfont>Event Startdate - Event Enddate </Appfont>
+        </Div>
       </Div>
-    </Div>
+    </Link>
   );
 };
 const flexer = {

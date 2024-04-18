@@ -39,7 +39,7 @@ const rows = [
   },
 ];
 
-const JudgeSecondEvent = () => {
+const SupervisorSecondEvent = () => {
   return (
     <div>
       <EventCard />
@@ -53,7 +53,7 @@ const JudgeSecondEvent = () => {
           <Appfont>Class Starttime</Appfont>
           <Appfont>Class Number of Participants</Appfont>
         </Div>
-        <Link to={ROUTE_PATH.THIRD_JUDGE_EVENT}>
+        <Link to={ROUTE_PATH.THIRD_SUPERVISOR_EVENT}>
           <AppButton sx={{ background: "#CF0E0E" }}>Live</AppButton>
         </Link>
       </Div>
@@ -66,6 +66,8 @@ const JudgeSecondEvent = () => {
             <Appheading>Rider Name </Appheading>
             <Appheading>Horse Name </Appheading>
             <Appheading>Horse Number </Appheading>
+            <Appheading>Total xx.xx % </Appheading>
+
           </Grid>
           <Grid item lg={6} xs={12}>
             <Button variant="contained" size="small" sx={{ background: "red" }}>
@@ -171,7 +173,7 @@ const JudgeSecondEvent = () => {
   );
 };
 
-export default JudgeSecondEvent;
+export default SupervisorSecondEvent;
 const EventCard = () => {
   return (
     <Div

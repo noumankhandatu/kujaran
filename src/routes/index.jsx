@@ -22,6 +22,10 @@ import JudgeFirstEvent from "../pages/event-registration/judge/first-event";
 import JudgeSecondEvent from "../pages/event-registration/judge/second-event";
 import JudgeThirdEvent from "../pages/event-registration/judge/third-event";
 import AllEventsSuperVisor from "../pages/event-registration/supervisor/all-events";
+import CreateEventSupervisorPage from "../pages/event-registration/supervisor/create-event";
+import FirstEventSupervisor from "../pages/event-registration/supervisor/first-event";
+import SupervisorSecondEvent from "../pages/event-registration/supervisor/second-event";
+import SupervisorThirdEvent from "../pages/event-registration/supervisor/third-event";
 
 const AppRouting = () => {
   return (
@@ -221,7 +225,44 @@ const AppRouting = () => {
             </Layout>
           }
         />
+        <Route
+          exact
+          path={`${ROUTE_PATH.CREATE_EVENT_SUPERVISOR}`}
+          element={
+            <Layout>
+              <CreateEventSupervisorPage />
+            </Layout>
+          }
+        />
 
+        <Route
+          exact
+          path={`${ROUTE_PATH.FIRST_SUPERVISOR_EVENT}`}
+          element={
+            <Layout>
+              <FirstEventSupervisor />
+            </Layout>
+          }
+        />
+        <Route
+          exact
+          path={`${ROUTE_PATH.SECOND_SUPERVISOR_EVENT}`}
+          element={
+            <Layout>
+              <SupervisorSecondEvent />
+            </Layout>
+          }
+        />
+
+        <Route
+          exact
+          path={`${ROUTE_PATH.THIRD_SUPERVISOR_EVENT}`}
+          element={
+            <Layout>
+              <SupervisorThirdEvent />
+            </Layout>
+          }
+        />
         <Route exact path={"*"} element={<NotFoundPage />} />
       </Routes>
     </Router>
