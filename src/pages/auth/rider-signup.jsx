@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -11,6 +12,10 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-paths";
+import { Appfont } from "./../../utils/theme/typo";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Div from "./../../components/atoms/Div";
 
 const RiderSignUp = () => {
   return (
@@ -84,11 +89,47 @@ const RiderSignUp = () => {
           type="tel"
           required
         />
-       <Link to={ROUTE_PATH.ALL_EVENTS_RIDER}>
-          <Button sx={{ width: "100%" }} type="submit" variant="contained" color="primary">
-            Sign Up
-          </Button>
-        </Link>
+        <Div
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Appfont>Rider</Appfont>
+          <IconButton sx={{ border: "1px solid red", background: "white" }}>
+            <AddIcon color="error" fontSize="small" />
+          </IconButton>
+        </Div>
+        <Div height={20} />
+        <Div
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Appfont>Horse</Appfont>
+          <IconButton sx={{ border: "1px solid red", background: "white" }}>
+            <RemoveIcon color="success" fontSize="small" />
+          </IconButton>
+        </Div>
+
+        <Div sx={{ width: "100%" ,mt:3 }}>
+          <Link to={ROUTE_PATH.ALL_EVENTS_RIDER}>
+            <Button
+              fullWidth
+              sx={{ width: "100%" }}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Sign Up
+            </Button>
+          </Link>
+        </Div>
       </form>
     </Container>
   );
