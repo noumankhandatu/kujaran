@@ -9,7 +9,6 @@ export const ROUTE_PATH = {
   FOURTH_EVENT: "/fourth_event",
   FIFTH_EVENT: "/fifth_event",
 
-  RIDER_PROFILE: "/rider_profile",
   HORSE_PROFILE: "/horse_profile",
   STABLE_PROFILE: "/stable_profile",
 
@@ -30,4 +29,11 @@ export const ROUTE_PATH = {
   FIRST_SUPERVISOR_EVENT: "/first_supervisor_event",
   SECOND_SUPERVISOR_EVENT: "/second_supervisore_event",
   THIRD_SUPERVISOR_EVENT: "/third_supervisor_event",
+
+  // started again
+  AUTH: {
+    SIGNUP: "/auth-signup",
+    SIGNIN: "/auth-signin",
+    VERIFY_MAIL: "/mail-verification",
+  },
 };

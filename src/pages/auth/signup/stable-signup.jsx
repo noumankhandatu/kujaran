@@ -11,9 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "../../utils/route-paths";
-import Div from "../../components/atoms/Div";
-import { Appfont } from "./../../utils/theme/typo";
+import { ROUTE_PATH } from "../../../utils/route-paths";
+import Div from "../../../components/atoms/Div";
+import { Appfont } from "../../../utils/theme/typo";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 const StableSignUp = () => {

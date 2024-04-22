@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Appheading } from "../../utils/theme/typo";
-import { AppButton } from "../../components/atoms/AppButton";
-import Div from "../../components/atoms/Div";
+import { Appheading } from "../../../utils/theme/typo";
+import { AppButton } from "../../../components/atoms/AppButton";
+import Div from "../../../components/atoms/Div";
 import RiderSignUp from "./rider-signup";
 import HorseSignUp from "./horse-signup";
 import StableSignUp from "./stable-signup";
 
-const SignUpPages = () => {
-  const [activeTab, setActiveTab] = useState("rider"); // State to track active tab
+const SignUpPage = () => {
+  const [activeTab, setActiveTab] = useState("rider");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -52,4 +52,4 @@ const SignUpPages = () => {
   );
 };
 
-export default SignUpPages;
+export default SignUpPage;

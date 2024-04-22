@@ -1,0 +1,23 @@
+ Registraion Response  
+
+ {
+    "success": true,
+    "message": "User registered successfully",
+    "user": {
+        "id": 7,
+        "name": "nouman",
+        "dob": "2024-04-23T00:00:00.000Z",
+        "nationality": "123",
+        "email": "nouman2@gmail.com",
+        "phone": "123",
+        "password": "$2b$10$wRuZdZz/rGqLUq7BJmzIh.iy97Tv6bOOlAzC.7OJ.16OpOtZPizxa",
+        "role": "RIDER",
+        "image": "https://res.cloudinary.com/dgfw49gjl/image/upload/v1713773243/aydvpavm5od3ud8xewhd.jpg",
+        "gender": "male",
+        "token": null,
+        "is_verified": false,
+        "createdAt": "2024-04-22T08:07:24.201Z",
+        "updatedAt": "2024-04-22T08:07:24.201Z",
+        "stableId": null
+    }
+}

@@ -11,13 +11,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "../../utils/route-paths";
-import { Appfont } from "./../../utils/theme/typo";
+import { ROUTE_PATH } from "../../../utils/route-paths/index";
+import Div from "../../../components/atoms/Div";
+import { Appfont } from "../../../utils/theme/typo";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import Div from "./../../components/atoms/Div";
 
-const RiderSignUp = () => {
+const HorseSignUp = () => {
   return (
     <Container
       sx={{
@@ -33,7 +33,7 @@ const RiderSignUp = () => {
     >
       <Avatar src="/avatar.svg" alt="Avatar" sx={{ width: 80, height: 80, marginBottom: 2 }} />
       <Typography variant="h5" gutterBottom>
-        Rider Sign Up
+        Horse Sign Up
       </Typography>
       <form
         style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
@@ -89,6 +89,7 @@ const RiderSignUp = () => {
           type="tel"
           required
         />
+
         <Div
           sx={{
             display: "flex",
@@ -117,7 +118,7 @@ const RiderSignUp = () => {
           </IconButton>
         </Div>
 
-        <Div sx={{ width: "100%" ,mt:3 }}>
+        <Div sx={{ width: "100%", mt: 3 }}>
           <Link to={ROUTE_PATH.ALL_EVENTS_RIDER}>
             <Button
               fullWidth
@@ -135,4 +136,4 @@ const RiderSignUp = () => {
   );
 };
 
-export default RiderSignUp;
+export default HorseSignUp;
