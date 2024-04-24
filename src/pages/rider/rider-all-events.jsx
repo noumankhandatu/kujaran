@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
-import { Appfont, Appheading } from "../../../utils/theme/typo";
-import Div from "../../../components/atoms/Div";
-import Title from "../../../components/molecules/title";
-import { alpha } from "../../../utils/theme/colors";
-import { AppButton } from "../../../components/atoms/AppButton";
+import Div from "../../components/atoms/Div";
+import Title from "../../components/molecules/title";
+import { alpha } from "../../utils/theme/colors";
+import { AppButton } from "../../components/atoms/AppButton";
 import { useNavigate } from "react-router-dom";
 import RiderModel from "./modal";
 import { useState } from "react";
-import { ROUTE_PATH } from "../../../utils/route-paths";
+import { ROUTE_PATH } from "../../utils/route-paths";
+import { Appfont, Appheading } from "../../utils/theme/typo";
 
-const AllEventsRider = () => {
+const RiderEvents = () => {
   const navigate = useNavigate();
   const [showModel, setshowModel] = useState(false);
 
@@ -18,12 +18,11 @@ const AllEventsRider = () => {
   };
 
   const handleReg = () => {
-    navigate(ROUTE_PATH.RIDER_REGISTRAION);
+    navigate(`/${ROUTE_PATH.RIDER.EVENT_REGISTER}`);
   };
   return (
     <Div>
       {showModel && <RiderModel />}
-
       <Div sx={{ p: 2, background: "#BEC9D9" }}>
         <Appheading>Rider Name</Appheading>
         <Div height={30} />
@@ -53,7 +52,7 @@ const AllEventsRider = () => {
   );
 };
 
-export default AllEventsRider;
+export default RiderEvents;
 
 const EventCard = ({ btnText = "Cancel", bg = "red", handleClick }) => {
   return (

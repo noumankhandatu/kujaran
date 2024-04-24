@@ -1,9 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { AppButton } from "../../../components/atoms/AppButton";
-import Div from "../../../components/atoms/Div";
-import { Appfont } from "../../../utils/theme/typo";
+import { Appfont } from "../../utils/theme/typo";
+import Div from "../../components/atoms/Div";
+import { AppButton } from "../../components/atoms/AppButton";
 
 const style = {
   position: "absolute",

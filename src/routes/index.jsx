@@ -2,9 +2,15 @@ import { lazy, Suspense } from "react";
 import SuspenseLoader from "../components/molecules/suspenseLoader";
 const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
 const PublicRoutes = lazy(() => import("./PublicRoutes"));
+import Cookies from "js-cookie"; // Import Cookies library
+import { useSelector } from "react-redux";
+import { reduxAccesstoken } from "../redux/slices/auth";
 
 const AppRouting = () => {
-  let auth = false;
+  const accessTokenRedux = useSelector(reduxAccesstoken);
+  const accessTokenCookies = Cookies.get("accessToken");
+  let auth = accessTokenRedux || accessTokenCookies;
+
   return (
     <div>
       <Suspense fallback={<SuspenseLoader />}>

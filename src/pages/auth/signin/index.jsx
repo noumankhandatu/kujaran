@@ -7,8 +7,15 @@ import { toast } from "react-toastify";
 import Loader from "../../../components/atoms/Loader";
 import { AppButton } from "../../../components/atoms/AppButton";
 import Cookies from "js-cookie";
+import { loginSuccess } from "../../../redux/slices/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_PATH } from "../../../utils/route-paths";
 
 const SignInPage = () => {
+  // global hooks
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // states
   const [userData, setUserData] = useState({
     email: "",
@@ -27,9 +34,9 @@ const SignInPage = () => {
       );
       if (response.data.success === true || response.status === 200) {
         toast.success(response.data.message);
-        Cookies.set("accessToken", response.data.token, { expires: 7 }); // Expires in 7 days
-
-        // Optionally, you can redirect the user to another page after successful sign-in
+        Cookies.set("accessToken", response.data.token, { expires: 7 });
+        dispatch(loginSuccess(response.data.token));
+        navigate(`/${ROUTE_PATH.RIDER.ALL_EVENTS}`);
       }
     } catch (error) {
       console.error("Sign-in Error:", error);

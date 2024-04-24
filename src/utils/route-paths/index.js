@@ -36,4 +36,16 @@ export const ROUTE_PATH = {
     SIGNIN: "/auth-signin",
     VERIFY_MAIL: "/mail-verification",
   },
+
+  // rider private routes
+  RIDER: {
+    ALL_EVENTS: "rider-all-events",
+    EVENT_REGISTER: "rider-event-register",
+    CLASS_REGISTER: "rider-class-register",
+  },
+};
+
+export const APP_ROLES = {
+  SUPERVISOR: "supervisor",
+  RIDER: "rider",
 };

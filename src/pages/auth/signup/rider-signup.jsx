@@ -4,15 +4,11 @@ import {
   Button,
   Container,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import { Appfont, Appheading } from "../../../utils/theme/typo";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import Div from "../../../components/atoms/Div";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -130,7 +126,6 @@ const RiderSignUp = () => {
         </Div>
       </div>
 
-      <Appheading>Rider Sign Up</Appheading>
       <form
         style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
         onSubmit={handleSubmit}
@@ -212,33 +207,6 @@ const RiderSignUp = () => {
             <MenuItem value="other">Other</MenuItem>
           </Select>
         </FormControl>
-        <Div
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <Appfont>Rider</Appfont>
-          <IconButton sx={{ border: "1px solid red", background: "white" }}>
-            <AddIcon color="error" fontSize="small" />
-          </IconButton>
-        </Div>
-        <Div height={20} />
-        <Div
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <Appfont>Horse</Appfont>
-          <IconButton sx={{ border: "1px solid red", background: "white" }}>
-            <RemoveIcon color="success" fontSize="small" />
-          </IconButton>
-        </Div>
 
         <Div sx={{ width: "100%", mt: 3 }}>
           {isLoading ? ( // Render loader if loading

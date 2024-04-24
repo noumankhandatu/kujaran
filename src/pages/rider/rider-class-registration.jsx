@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import { Appfont, Appheading } from "../../../utils/theme/typo";
-import Div from "../../../components/atoms/Div";
-import Title from "../../../components/molecules/title";
-import { alpha } from "../../../utils/theme/colors";
+import { Appfont, Appheading } from "../../utils/theme/typo";
+import Div from "../../components/atoms/Div";
+import Title from "../../components/molecules/title";
+import { alpha } from "../../utils/theme/colors";
 import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "../../../utils/route-paths";
+import { ROUTE_PATH } from "../../utils/route-paths";
 import { IconButton, TextField } from "@mui/material";
-import { AppButton } from "../../../components/atoms/AppButton";
+import { AppButton } from "../../components/atoms/AppButton";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-const RiderRegistration = () => {
+const RiderClassRegistration = () => {
   return (
     <Div>
       <Div sx={{ p: 2, background: "#BEC9D9" }}>
@@ -92,7 +92,7 @@ const RiderRegistration = () => {
   );
 };
 
-export default RiderRegistration;
+export default RiderClassRegistration;
 
 const EventCard = () => {
   return (
