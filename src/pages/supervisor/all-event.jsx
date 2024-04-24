@@ -1,36 +1,43 @@
 /* eslint-disable react/prop-types */
-import { Appfont, Appheading } from "../../../utils/theme/typo";
-import Div from "../../../components/atoms/Div";
-import Title from "../../../components/molecules/title";
-import { alpha } from "../../../utils/theme/colors";
-import { AppButton } from "../../../components/atoms/AppButton";
-import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "../../../utils/route-paths";
 
-const AllEventsSuperVisor = () => {
+import { Link, useNavigate } from "react-router-dom";
+import Div from "../../components/atoms/Div";
+import Title from "../../components/molecules/title";
+import { Appfont } from "../../utils/theme/typo";
+import { ROUTE_PATH } from "../../utils/route-paths";
+import { AppButton } from "../../components/atoms/AppButton";
+import { alpha } from "../../utils/theme/colors";
+import { IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import IntroCard from "./components/IntroCard";
+
+const AllEvents = () => {
+  const navigate = useNavigate();
+  const handleCreateEvent = () => {
+    navigate(ROUTE_PATH.SUPERVISOR.CREATE_EVENT);
+  };
   return (
     <Div>
-      <Div sx={{ p: 2, background: "#BEC9D9" }}>
-        <Appheading>Supervisor</Appheading>
-        <Div height={30} />
-        <Div sx={{ display: "flex" }}>
-          <img src="/avatar.svg" alt="" />
-          <Div sx={{ ml: 2 }}>
-            <Appfont>Supervisor Name</Appfont>
-            <Appfont>DOB</Appfont>
-            <Appfont>Nationality</Appfont>
-          </Div>
-        </Div>
-      </Div>
+      <IntroCard />
       <Title bg={"#1B2A41"}>Registered</Title>
       <EventCard />
       <hr />
       <EventCard />
+      <Div sx={{ p: 3 }}>
+        <Div sx={{ display: "flex ", alignItems: "center" }}>
+          <IconButton onClick={handleCreateEvent} size="small" sx={{ border: "1px solid red" }}>
+            <AddIcon fontSize="small" />
+          </IconButton>
+          <Appfont sx={{ ml: 2, fontSize: 20 }}>Create Event</Appfont>
+        </Div>
+      </Div>
+
+      <Div height={40} />
     </Div>
   );
 };
 
-export default AllEventsSuperVisor;
+export default AllEvents;
 
 const EventCard = () => {
   return (

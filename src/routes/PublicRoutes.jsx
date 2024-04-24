@@ -14,8 +14,8 @@ const PublicRoutes = () => {
       <Suspense fallback={<SuspenseLoader />}>
         <Router>
           <Routes>
-            {["/", ROUTE_PATH.AUTH.SIGNUP].map((path, id) => (
-              <Route key={id} exact path={path} element={<SignUpPage />} />
+            {["/", ROUTE_PATH.AUTH.SIGNIN].map((path, id) => (
+              <Route key={id} exact path={path} element={<SignInPage />} />
             ))}
 
             <Route
@@ -23,7 +23,7 @@ const PublicRoutes = () => {
               path={ROUTE_PATH.AUTH.VERIFY_MAIL}
               element={<SignUpVerificationMaiPage />}
             />
-            <Route exact path={ROUTE_PATH.AUTH.SIGNIN} element={<SignInPage />} />
+            <Route exact path={ROUTE_PATH.AUTH.SIGNUP} element={<SignUpPage />} />
 
             <Route exact path={"*"} element={<NotFoundPage />} />
           </Routes>

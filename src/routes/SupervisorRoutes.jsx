@@ -5,49 +5,45 @@ import SuspenseLoader from "../components/molecules/suspenseLoader";
 
 const NotFoundPage = lazy(() => import("../pages/404/index"));
 const Layout = lazy(() => import("./../components/molecules/layout"));
-const RiderEvents = lazy(() => import("../pages/rider/rider-all-events"));
-const RiderEventRegistration = lazy(() => import("../pages/rider/rider-event-register"));
-const RiderClassRegistration = lazy(() => import("../pages/rider/rider-class-registration"));
+const AllEvents = lazy(() => import("../pages/supervisor/all-event"));
+const CreateEvent = lazy(() => import("../pages/supervisor/create-event"));
 
-const PublicRoutes = () => {
+const SupervisorRoutes = () => {
   return (
     <div>
       <Suspense fallback={<SuspenseLoader />}>
         <Router>
           <Routes>
-            {["/", ROUTE_PATH.RIDER.ALL_EVENTS].map((path, id) => (
+            {["/", ROUTE_PATH.SUPERVISOR.ALL_EVENT].map((path, id) => (
               <Route
                 key={id}
                 exact
                 path={path}
                 element={
                   <Layout>
-                    <RiderEvents />
+                    <AllEvents />
                   </Layout>
                 }
               />
             ))}
-
             <Route
               exact
-              path={ROUTE_PATH.RIDER.EVENT_REGISTER}
+              path={ROUTE_PATH.SUPERVISOR.CREATE_EVENT}
               element={
                 <Layout>
-                  <RiderEventRegistration />
+                  <CreateEvent />
                 </Layout>
               }
             />
             <Route
               exact
-              path={ROUTE_PATH.RIDER.CLASS_REGISTER}
+              path={"*"}
               element={
                 <Layout>
-                  <RiderClassRegistration />
+                  <NotFoundPage />
                 </Layout>
               }
             />
-
-            <Route exact path={"*"} element={<NotFoundPage />} />
           </Routes>
         </Router>
       </Suspense>
@@ -55,4 +51,4 @@ const PublicRoutes = () => {
   );
 };
 
-export default PublicRoutes;
+export default SupervisorRoutes;

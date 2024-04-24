@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, TextField } from "@mui/material";
-import { Appheading } from "../../../utils/theme/typo";
+import { Appfont, Appheading } from "../../../utils/theme/typo";
 import Div from "../../../components/atoms/Div";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ import { AppButton } from "../../../components/atoms/AppButton";
 import Cookies from "js-cookie";
 import { loginSuccess } from "../../../redux/slices/auth";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../../utils/route-paths";
 
 const SignInPage = () => {
@@ -35,8 +35,15 @@ const SignInPage = () => {
       if (response.data.success === true || response.status === 200) {
         toast.success(response.data.message);
         Cookies.set("accessToken", response.data.token, { expires: 7 });
-        dispatch(loginSuccess(response.data.token));
-        navigate(`/${ROUTE_PATH.RIDER.ALL_EVENTS}`);
+        Cookies.set("role", response.data.role, { expires: 7 });
+
+        dispatch(
+          loginSuccess({
+            token: response.data.token,
+            role: response.data.role,
+          })
+        );
+        navigate(`/`);
       }
     } catch (error) {
       console.error("Sign-in Error:", error);
@@ -77,8 +84,10 @@ const SignInPage = () => {
           },
         }}
       >
-        <Appheading>Sign In</Appheading>
-        <Div height={70} />
+        <Div height={30} />
+        <Appheading sx={{ textAlign: "center" }}> Welcome to Kujaran</Appheading>
+        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>Please Login and continue</Appfont>
+        <Div height={30} />
 
         <form
           style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
@@ -122,6 +131,11 @@ const SignInPage = () => {
           </Div>
         </form>
       </Container>
+
+      <Div height={50} />
+      <Appfont sx={{ textAlign: "center" }}>
+        No Account ? <Link to={ROUTE_PATH.AUTH.SIGNUP}> Register</Link>
+      </Appfont>
     </Div>
   );
 };

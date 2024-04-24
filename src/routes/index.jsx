@@ -1,20 +1,33 @@
 import { lazy, Suspense } from "react";
 import SuspenseLoader from "../components/molecules/suspenseLoader";
-const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
 const PublicRoutes = lazy(() => import("./PublicRoutes"));
+const SupervisorRoutes = lazy(() => import("./SupervisorRoutes"));
+const RiderRoutes = lazy(() => import("./RiderRoutes"));
+
 import Cookies from "js-cookie"; // Import Cookies library
 import { useSelector } from "react-redux";
-import { reduxAccesstoken } from "../redux/slices/auth";
+import { reduxAccesstoken, reduxRole } from "../redux/slices/auth";
+import { APP_ROLES } from "../utils/route-paths";
 
 const AppRouting = () => {
+  // tokens
   const accessTokenRedux = useSelector(reduxAccesstoken);
   const accessTokenCookies = Cookies.get("accessToken");
-  let auth = accessTokenRedux || accessTokenCookies;
+  // roles
+  const RoleRedux = useSelector(reduxRole);
+  const roleCookies = Cookies.get("role");
 
+  // redux & cookies
+  let authTokenValid = accessTokenRedux || accessTokenCookies;
+  let appRole = RoleRedux || roleCookies;
+
+  console.log(appRole, "appRole");
   return (
     <div>
       <Suspense fallback={<SuspenseLoader />}>
-        {auth ? <PrivateRoutes /> : <PublicRoutes />}
+        {authTokenValid && appRole === APP_ROLES.SUPERVISOR && <SupervisorRoutes />}
+        {authTokenValid && appRole === APP_ROLES.RIDER && <RiderRoutes />}
+        {(!authTokenValid || !appRole) && <PublicRoutes />}
       </Suspense>
     </div>
   );
