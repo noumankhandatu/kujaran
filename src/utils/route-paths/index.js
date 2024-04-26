@@ -8,6 +8,8 @@ export const ROUTE_PATH = {
   SUPERVISOR: {
     ALL_EVENT: "/supervisor-all-events",
     CREATE_EVENT: "/supervisor-create-events",
+    SELECT_EVENT: "/supervisor-select-events",
+    SELECT_CLASS: "/supervisor-select-classs",
   },
   // rider private routes
   RIDER: {

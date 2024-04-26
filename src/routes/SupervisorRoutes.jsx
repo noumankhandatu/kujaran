@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { ROUTE_PATH } from "../utils/route-paths";
 import SuspenseLoader from "../components/molecules/suspenseLoader";
+import SelectedEvent from "../pages/supervisor/selected-event";
+import SelectedClass from "../pages/supervisor/selected-class";
 
 const NotFoundPage = lazy(() => import("../pages/404/index"));
 const Layout = lazy(() => import("./../components/molecules/layout"));
@@ -32,6 +34,24 @@ const SupervisorRoutes = () => {
               element={
                 <Layout>
                   <CreateEvent />
+                </Layout>
+              }
+            />
+            <Route
+              exact
+              path={`${ROUTE_PATH.SUPERVISOR.SELECT_EVENT}/:id`}
+              element={
+                <Layout>
+                  <SelectedEvent />
+                </Layout>
+              }
+            />{" "}
+            <Route
+              exact
+              path={`${ROUTE_PATH.SUPERVISOR.SELECT_CLASS}/:id`}
+              element={
+                <Layout>
+                  <SelectedClass />
                 </Layout>
               }
             />

@@ -5,7 +5,7 @@ import Div from "../../components/atoms/Div";
 import { Appfont, Appheading } from "../../utils/theme/typo";
 import { ROUTE_PATH } from "../../utils/route-paths";
 import { AppButton } from "../../components/atoms/AppButton";
-import { alpha } from "../../utils/theme/colors";
+import EventCard from "./components/EventCard";
 
 const SelectedClass = () => {
   return (
@@ -124,22 +124,7 @@ const SelectedClass = () => {
 };
 
 export default SelectedClass;
-const EventCard = () => {
-  return (
-    <Link to={ROUTE_PATH.SECOND_SUPERVISOR_EVENT}>
-      <Div
-        sx={{ display: "flex", alignItems: "center", gap: 2, background: alpha, cursor: "pointer" }}
-      >
-        <img src="/eventlogo.png" alt="" />
-        <Div>
-          <Appheading>Event Name</Appheading>
-          <Appfont>Event Location</Appfont>
-          <Appfont>Event Startdate - Event Enddate </Appfont>
-        </Div>
-      </Div>
-    </Link>
-  );
-};
+
 const flexer = {
   display: "flex",
   justifyContent: "space-between",

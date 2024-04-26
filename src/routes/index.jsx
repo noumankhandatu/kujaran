@@ -1,13 +1,13 @@
 import { lazy, Suspense } from "react";
 import SuspenseLoader from "../components/molecules/suspenseLoader";
-const PublicRoutes = lazy(() => import("./PublicRoutes"));
-const SupervisorRoutes = lazy(() => import("./SupervisorRoutes"));
-const RiderRoutes = lazy(() => import("./RiderRoutes"));
-
-import Cookies from "js-cookie"; // Import Cookies library
+import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { reduxAccesstoken, reduxRole } from "../redux/slices/auth";
 import { APP_ROLES } from "../utils/route-paths";
+
+const PublicRoutes = lazy(() => import("./PublicRoutes"));
+const SupervisorRoutes = lazy(() => import("./SupervisorRoutes"));
+const RiderRoutes = lazy(() => import("./RiderRoutes"));
 
 const AppRouting = () => {
   // tokens
@@ -21,7 +21,6 @@ const AppRouting = () => {
   let authTokenValid = accessTokenRedux || accessTokenCookies;
   let appRole = RoleRedux || roleCookies;
 
-  console.log(appRole, "appRole");
   return (
     <div>
       <Suspense fallback={<SuspenseLoader />}>

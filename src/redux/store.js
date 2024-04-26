@@ -1,12 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { AuthApi } from "./services/auth";
+// slice import
 import authReducer from "./slices/auth";
+
+// rtk query imports
+import AuthApi from "./services/auth";
+import SupervisorApi from "./services/supervisor-apis";
+
 const store = configureStore({
   reducer: {
     auth: authReducer,
     [AuthApi.reducerPath]: AuthApi.reducer,
+    [SupervisorApi.reducerPath]: SupervisorApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(AuthApi.middleware),
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(AuthApi.middleware, SupervisorApi.middleware),
+
   devTools: import.meta.env.APP_MODE !== "production",
 });
 

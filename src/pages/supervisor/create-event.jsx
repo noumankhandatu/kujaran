@@ -1,12 +1,21 @@
 /* eslint-disable react/prop-types */
 import { TextField } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 import IntroCard from "./components/IntroCard";
 import { useState } from "react";
 import { AppButton } from "../../components/atoms/AppButton";
-import axios from "axios";
+import ImageUploader from "../../components/molecules/ImageUploader";
+import { useCreateEventMutation } from "../../redux/services/supervisor-apis";
+import Loader from "./../../components/atoms/Loader";
+import { Select, MenuItem } from "@mui/material";
+import { toast } from "react-toastify";
+
+const statusOptions = [
+  { value: "LIVE", label: "LIVE" },
+  //   { value: "UPCOMING", label: "UPCOMING" },
+  //   { value: "ENDED", label: "ENDED" },
+];
 
 const CreateEvent = () => {
   // State variables to hold form data
@@ -18,29 +27,35 @@ const CreateEvent = () => {
   const [status, setStatus] = useState("");
   const [image, setImage] = useState("");
 
+  // Mutation hook for creating an event
+  const [createEvent, { isLoading, isError }] = useCreateEventMutation();
+
+  if (isError) {
+    return <>Something went wrong please try again later</>;
+  }
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!image) return toast.warn("Please select event image");
     try {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("location", location);
       formData.append("description", description);
-      formData.append("startDate", startDate);
-      formData.append("endDate", endDate);
+      formData.append("startDate", new Date(startDate).toISOString());
+      formData.append("endDate", new Date(endDate).toISOString());
       formData.append("status", status);
       formData.append("image", image);
 
-      const response = await axios.post(
-        "http://localhost:5000/api/supervisor/event/create",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("Event created successfully:", response.data);
+      const response = await createEvent(formData);
+      if (response.data.success === true) {
+        toast.success(response.data.message);
+      }
       // Reset form fields after successful submission
       setTitle("");
       setLocation("");
@@ -60,14 +75,11 @@ const CreateEvent = () => {
       <Title bg={"#1B2A41"}>Registered</Title>
       <Div sx={{ m: 2 }}>
         <form onSubmit={handleSubmit}>
-          <TextField
-            sx={{ width: "100%", marginBottom: 2 }}
-            variant="outlined"
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
-            required
+          <ImageUploader
+            defaultImage="/eventlogo.png"
+            label="Upload Event Image"
+            setImage={setImage}
           />
-
           <TextField
             sx={{ width: "100%", marginBottom: 2 }}
             label="Title"
@@ -111,39 +123,25 @@ const CreateEvent = () => {
             />
           </Div>
 
-          <TextField
-            sx={{ width: "100%", marginBottom: 2 }}
-            label="Status"
-            variant="outlined"
+          <Select
+            sx={{ width: "100%" }}
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={handleStatusChange}
             required
-          />
-
-          <AppButton type="submit">Create</AppButton>
+            label={"Status"}
+          >
+            {statusOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+          <Div height={30} />
+          {isLoading && <Loader />}
+          {!isLoading && <AppButton type="submit">Create</AppButton>}
         </form>
       </Div>
-      <Title bg="#1B2A41">Sponsors</Title>
-      <Title bg={"#D9D9D9"} color="black">
-        <span style={{ display: "flex", alignItems: "center" }}>
-          <AddIcon sx={{ color: "green" }} />
-          Add Sponsor
-        </span>
-      </Title>
-      <Title bg="#1B2A41">Technical Handbook</Title>
-      <Title bg={"#D9D9D9"} color="black">
-        <span style={{ display: "flex", alignItems: "center" }}>
-          <AddIcon sx={{ color: "green" }} />
-          Add Pdf
-        </span>
-      </Title>
-      <Title bg="#1B2A41">Class</Title>
-      <Title bg={"#D9D9D9"} color="black">
-        <span style={{ display: "flex", alignItems: "center" }}>
-          <AddIcon sx={{ color: "green" }} />
-          Add Class
-        </span>
-      </Title>
+      <Div height={100} />
     </Div>
   );
 };

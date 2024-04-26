@@ -10,19 +10,30 @@ import { alpha } from "../../utils/theme/colors";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import IntroCard from "./components/IntroCard";
+import { useGetAllEventsQuery } from "../../redux/services/supervisor-apis";
+import AppDateFormatter from "../../components/hooks/DateFormatter";
 
 const AllEvents = () => {
   const navigate = useNavigate();
+  const { data, error, isLoading } = useGetAllEventsQuery();
+
   const handleCreateEvent = () => {
     navigate(ROUTE_PATH.SUPERVISOR.CREATE_EVENT);
   };
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <Div>
       <IntroCard />
       <Title bg={"#1B2A41"}>Registered</Title>
-      <EventCard />
-      <hr />
-      <EventCard />
+      {data.events.map((items, id) => {
+        return (
+          <div key={id}>
+            <EventCard {...items} />
+          </div>
+        );
+      })}
+
       <Div sx={{ p: 3 }}>
         <Div sx={{ display: "flex ", alignItems: "center" }}>
           <IconButton onClick={handleCreateEvent} size="small" sx={{ border: "1px solid red" }}>
@@ -39,33 +50,36 @@ const AllEvents = () => {
 
 export default AllEvents;
 
-const EventCard = () => {
+const EventCard = ({ title, image, startDate, endDate, location, id }) => {
   return (
-    <Link to={ROUTE_PATH.CREATE_EVENT_SUPERVISOR}>
-      <Div
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          background: alpha,
-          cursor: "pointer",
-          justifyContent: "space-between",
-        }}
-      >
+    <Div
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: 2,
+        background: alpha,
+        cursor: "pointer",
+        justifyContent: "space-between",
+      }}
+    >
+      <Link to={`${ROUTE_PATH.SUPERVISOR.SELECT_EVENT}/${id}`}>
         <Div sx={{ display: "flex", gap: 2 }}>
-          <img src="/eventlogo.png" alt="" />
+          <img style={{ width: 200, height: 200 }} src={image} alt="" />
           <Div>
-            <Appfont>Event Name</Appfont>
-            <Appfont>Event Location</Appfont>
-            <Appfont>Event Startdate - Event Enddate </Appfont>
+            <Appfont sx={{ textTransform: "capitalize" }}>{title}</Appfont>
+            <Appfont sx={{ mb: 1, mt: 1 }}>{location}</Appfont>
+            <Appfont>
+              <AppDateFormatter date={startDate} /> -
+              <AppDateFormatter date={endDate} />
+            </Appfont>
           </Div>
         </Div>
-        <Div sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 2, mb: 2 }}>
-          <AppButton sx={{ mr: 2, background: "green" }}>{"Edit"}</AppButton>
-          <AppButton sx={{ mr: 2, background: "red" }}>{"Delete"}</AppButton>
-          <AppButton sx={{ mr: 2, background: "#DBDE27" }}>{"Judge"}</AppButton>
-        </Div>
+      </Link>
+      <Div sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 2, mb: 2 }}>
+        <AppButton sx={{ mr: 2, background: "green" }}>{"Edit"}</AppButton>
+        <AppButton sx={{ mr: 2, background: "red" }}>{"Delete"}</AppButton>
+        <AppButton sx={{ mr: 2, background: "#DBDE27" }}>{"Judge"}</AppButton>
       </Div>
-    </Link>
+    </Div>
   );
 };

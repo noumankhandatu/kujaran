@@ -1,34 +1,18 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import axios from "axios";
+import Cookies from "js-cookie";
 
-const accessToken = localStorage.getItem("accessToken");
+const accessToken = Cookies.get("accessToken");
 
-const refreshToken = localStorage.getItem("refreshToken");
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_APP_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
 });
 const BaseURL = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
-    const refreshResult = await axios
-      .post(`${import.meta.env.VITE_APP_BASE_URL}auth/refresh-token`, {
-        refresh_token: refreshToken,
-      })
-      .catch((err) => {
-        if (err.response.status && err) {
-          logoutUser();
-        }
-        console.log(err, "err");
-      });
-    if (refreshResult?.access?.token) {
-      const newAccessToken = refreshResult.access?.token;
-      localStorage.setItem("accessToken", newAccessToken);
-      window.location.reload();
-    }
+    console.log("Lets log out user we dont have refresh token ");
   }
   return result;
 };
