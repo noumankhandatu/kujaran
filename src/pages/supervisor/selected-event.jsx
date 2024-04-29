@@ -70,10 +70,9 @@ const SelectedEvent = () => {
 export default SelectedEvent;
 const ClassSchedule = ({ getClassses, id }) => {
   const navigate = useNavigate();
-  const handleClass = () => {
-    navigate(ROUTE_PATH.SUPERVISOR.SELECT_CLASS + "/" + id);
+  const handleClass = (index) => {
+    navigate(`${ROUTE_PATH.SUPERVISOR.SELECT_CLASS}/${id}?selectclass=${index}`);
   };
-
   return (
     <>
       {getClassses?.CompetitionClass.length === 0 && (
@@ -91,8 +90,12 @@ const ClassSchedule = ({ getClassses, id }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {getClassses?.CompetitionClass.map((items, id) => (
-                <TableRow sx={{ cursor: "pointer" }} onClick={handleClass} key={id}>
+              {getClassses?.CompetitionClass.map((items) => (
+                <TableRow
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleClass(items.id)}
+                  key={items.id}
+                >
                   <TableCell>
                     <Appfont>{items.className}</Appfont>
                   </TableCell>

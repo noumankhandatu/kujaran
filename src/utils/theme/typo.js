@@ -32,3 +32,14 @@ export const Appcaption = styled(Typography)({
   lineHeight: "22.4px",
   color: "#9393AA",
 });
+
+export const AppMessage = styled(Typography)({
+  fontFamily: "Inter",
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: "30px",
+  color: "black",
+  marginTop: "30px",
+  marginBottom: "30px",
+  textAlign: "center",
+});

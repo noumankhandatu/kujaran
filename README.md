@@ -10,6 +10,14 @@ weaver@mailinator.com
 Rider
 dragonknight@mailinator.com
 
+
+Stable
+Techies@mailinator.com
+
+
+Horse
+Abaddon@mmailinator.com
+
 password :12345
 
 

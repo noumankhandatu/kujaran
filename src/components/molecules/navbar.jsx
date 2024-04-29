@@ -1,6 +1,6 @@
 import { primary } from "../../utils/theme/colors";
 import Div from "./../atoms/Div";
-import ham from "../../assets/svgs/hamburger.svg";
+import AppMenu from "../atoms/AppMenu";
 
 const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ const Navbar = () => {
         <img src="/logo.svg" alt="" style={{ width: 120 }} />
       </Div>
       <Div sx={sty}>
-        <img src={ham} alt="" />
+        <AppMenu />
       </Div>
     </Div>
   );
