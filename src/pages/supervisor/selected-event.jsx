@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 import IntroCard from "./components/IntroCard";
-import { useGetEventClassAndSponsorsMutation } from "../../redux/services/supervisor-apis";
+import { useGetEventClassAndSponsorsQuery } from "../../redux/services/supervisor-apis";
 import { Appfont } from "../../utils/theme/typo";
 import { useNavigate } from "react-router-dom";
 import AppDateFormatter from "../../components/hooks/DateFormatter";
@@ -21,25 +21,11 @@ import {
 import { ROUTE_PATH } from "../../utils/route-paths";
 import EventCard from "./components/EventCard";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const SelectedEvent = () => {
-  const [getEventClasses] = useGetEventClassAndSponsorsMutation();
   const { id } = useParams();
 
-  // states
-  const [classResponse, setClassResponse] = useState(null);
-  const [getSponsor, setgetSponsor] = useState(null);
-  useEffect(() => {
-    const fetchClasses = async () => {
-      const res = await getEventClasses(id);
-      if (res?.data?.success === true) {
-        setClassResponse(res?.data?.event);
-        setgetSponsor(res?.data?.event);
-      }
-    };
-    fetchClasses();
-  }, [getEventClasses, id]);
+  const { data: eventData } = useGetEventClassAndSponsorsQuery(id);
   return (
     <Div>
       <IntroCard />
@@ -47,15 +33,15 @@ const SelectedEvent = () => {
       <EventCard />
 
       <Title bg="#1B2A41">Event Sponsors</Title>
-      {getSponsor?.sponsors.length === 0 && (
+      {eventData?.event?.sponsors.length === 0 && (
         <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Sponsors Found</Appfont>
       )}
-      {getSponsor?.sponsors.length !== 0 && (
+      {eventData?.event?.sponsors.length !== 0 && (
         <Div
           sx={{ display: "flex", gap: 2, m: 2, justifyContent: "space-between", flexWrap: "wrap" }}
         >
-          {getSponsor &&
-            getSponsor?.sponsors.map((items, id) => {
+          {eventData &&
+            eventData?.event?.sponsors.map((items, id) => {
               return (
                 <Paper sx={{ p: 2 }} key={id} elevation={3}>
                   <img style={{ width: 150, height: 120 }} src={items.image} alt="" />
@@ -75,7 +61,7 @@ const SelectedEvent = () => {
         </span>
       </Title>
       <Title bg="#1B2A41">Event Classes</Title>
-      <ClassSchedule getClassses={classResponse} id={id} />
+      <ClassSchedule getClassses={eventData?.event} id={id} />
       <ClassModal eventId={id} />
     </Div>
   );

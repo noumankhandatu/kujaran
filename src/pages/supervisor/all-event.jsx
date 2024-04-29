@@ -21,18 +21,23 @@ const AllEvents = () => {
     navigate(ROUTE_PATH.SUPERVISOR.CREATE_EVENT);
   };
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
   return (
     <Div>
       <IntroCard />
       <Title bg={"#1B2A41"}>Created Evented</Title>
-      {data.events.map((items, id) => {
-        return (
-          <div key={id}>
-            <EventCard {...items} />
-          </div>
-        );
-      })}
+      {error && (
+        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>
+          Couldnt Load Event Please try again later{" "} ⚠️
+        </Appfont>
+      )}
+      {data &&
+        data.events.map((items, id) => {
+          return (
+            <div key={id}>
+              <EventCard {...items} />
+            </div>
+          );
+        })}
 
       <Div sx={{ p: 3 }}>
         <Div sx={{ display: "flex ", alignItems: "center" }}>
