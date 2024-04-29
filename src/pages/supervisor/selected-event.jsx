@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 import IntroCard from "./components/IntroCard";
-import { useGetClassesQuery, useGetSponsorQuery } from "../../redux/services/supervisor-apis";
+import { useGetEventClassAndSponsorsMutation } from "../../redux/services/supervisor-apis";
 import { Appfont } from "../../utils/theme/typo";
 import { useNavigate } from "react-router-dom";
 import AppDateFormatter from "../../components/hooks/DateFormatter";
@@ -21,32 +21,51 @@ import {
 import { ROUTE_PATH } from "../../utils/route-paths";
 import EventCard from "./components/EventCard";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const SelectedEvent = () => {
-  const { data: getSponsor } = useGetSponsorQuery();
-  const { data: getClassses } = useGetClassesQuery();
+  const [getEventClasses] = useGetEventClassAndSponsorsMutation();
   const { id } = useParams();
 
+  // states
+  const [classResponse, setClassResponse] = useState(null);
+  const [getSponsor, setgetSponsor] = useState(null);
+  useEffect(() => {
+    const fetchClasses = async () => {
+      const res = await getEventClasses(id);
+      if (res?.data?.success === true) {
+        setClassResponse(res?.data?.event);
+        setgetSponsor(res?.data?.event);
+      }
+    };
+    fetchClasses();
+  }, [getEventClasses, id]);
   return (
     <Div>
       <IntroCard />
-      <Div height={100} />
+      <Div height={20} />
       <EventCard />
 
-      <Title bg="#1B2A41">Sponsors</Title>
-      <Div
-        sx={{ display: "flex", gap: 2, m: 2, justifyContent: "space-between", flexWrap: "wrap" }}
-      >
-        {getSponsor &&
-          getSponsor?.eventSponsors.map((items, id) => {
-            return (
-              <Paper sx={{ p: 2 }} key={id} elevation={3}>
-                <img style={{ width: 150, height: 120 }} src={items.image} alt="" />
-                <Appfont>{items.name}</Appfont>
-              </Paper>
-            );
-          })}
-      </Div>
+      <Title bg="#1B2A41">Event Sponsors</Title>
+      {getSponsor?.sponsors.length === 0 && (
+        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Sponsors Found</Appfont>
+      )}
+      {getSponsor?.sponsors.length !== 0 && (
+        <Div
+          sx={{ display: "flex", gap: 2, m: 2, justifyContent: "space-between", flexWrap: "wrap" }}
+        >
+          {getSponsor &&
+            getSponsor?.sponsors.map((items, id) => {
+              return (
+                <Paper sx={{ p: 2 }} key={id} elevation={3}>
+                  <img style={{ width: 150, height: 120 }} src={items.image} alt="" />
+                  <Appfont>{items.name}</Appfont>
+                </Paper>
+              );
+            })}
+        </Div>
+      )}
+
       <SponsorModal eventId={id} />
       <Title bg="#1B2A41">Technical Handbook</Title>
       <Title bg={"#D9D9D9"} color="black">
@@ -55,8 +74,8 @@ const SelectedEvent = () => {
           Add Pdf
         </span>
       </Title>
-      <Title bg="#1B2A41">Class</Title>
-      <ClassSchedule getClassses={getClassses} id={id} />
+      <Title bg="#1B2A41">Event Classes</Title>
+      <ClassSchedule getClassses={classResponse} id={id} />
       <ClassModal eventId={id} />
     </Div>
   );
@@ -68,39 +87,46 @@ const ClassSchedule = ({ getClassses, id }) => {
   const handleClass = () => {
     navigate(ROUTE_PATH.SUPERVISOR.SELECT_CLASS + "/" + id);
   };
+
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Class Name</TableCell>
-            <TableCell>Class Status</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Class Start Time</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {getClassses &&
-            getClassses.data.map((items, id) => (
-              <TableRow sx={{ cursor: "pointer" }} onClick={handleClass} key={id}>
-                <TableCell>
-                  <Appfont>{items.className}</Appfont>
-                </TableCell>
-                <TableCell>
-                  <Appfont>{items.classStatus}</Appfont>
-                </TableCell>
-                <TableCell>
-                  <Appfont>{items.type}</Appfont>
-                </TableCell>
-                <TableCell>
-                  <Appfont>
-                    <AppDateFormatter date={items.classStartTime} />
-                  </Appfont>
-                </TableCell>
+    <>
+      {getClassses?.CompetitionClass.length === 0 && (
+        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Classes Found</Appfont>
+      )}
+      {getClassses?.CompetitionClass.length !== 0 && (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Class Name</TableCell>
+                <TableCell>Class Status</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Class Start Time</TableCell>
               </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableHead>
+            <TableBody>
+              {getClassses?.CompetitionClass.map((items, id) => (
+                <TableRow sx={{ cursor: "pointer" }} onClick={handleClass} key={id}>
+                  <TableCell>
+                    <Appfont>{items.className}</Appfont>
+                  </TableCell>
+                  <TableCell>
+                    <Appfont>{items.classStatus}</Appfont>
+                  </TableCell>
+                  <TableCell>
+                    <Appfont>{items.type}</Appfont>
+                  </TableCell>
+                  <TableCell>
+                    <Appfont>
+                      <AppDateFormatter date={items.classStartTime} />
+                    </Appfont>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 };

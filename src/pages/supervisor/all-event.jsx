@@ -25,7 +25,7 @@ const AllEvents = () => {
   return (
     <Div>
       <IntroCard />
-      <Title bg={"#1B2A41"}>Registered</Title>
+      <Title bg={"#1B2A41"}>Created Evented</Title>
       {data.events.map((items, id) => {
         return (
           <div key={id}>

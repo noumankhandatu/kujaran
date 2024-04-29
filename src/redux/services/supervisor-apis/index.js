@@ -50,19 +50,11 @@ export const SupervisorApi = createApi({
       }),
       invalidatesTags: ["SupervisorApi"],
     }),
-    getSponsor: builder.query({
-      query: () => ({
-        url: "/event/sponsor/getAll",
+    getEventClassAndSponsors: builder.mutation({
+      query: (id) => ({
+        url: `get/event/${id}/judge`,
         method: "GET",
       }),
-    }),
-    getClasses: builder.query({
-      query: () => ({
-        url: "/competition/classes/getAll",
-        method: "GET",
-        providesTags: ["SupervisorApi"],
-      }),
-      providesTags: ["SupervisorApi"],
     }),
   }),
 });
@@ -74,8 +66,7 @@ export const {
   useGetEventByIdMutation,
   useAddSponsorMutation,
   useAddClassMutation,
-  useGetSponsorQuery,
-  useGetClassesQuery,
+  useGetEventClassAndSponsorsMutation,
 } = SupervisorApi;
 
 export default SupervisorApi;
