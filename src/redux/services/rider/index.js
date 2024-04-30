@@ -19,9 +19,15 @@ export const RiderApi = createApi({
       }),
       providesTags: ["SupervisorApi"],
     }),
+    riderAllClasses: builder.query({
+      query: () => ({
+        url: "/competition/classes/getAll",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetRiderQuery, useGetAllEventsRiderQuery } = RiderApi;
+export const { useGetRiderQuery, useGetAllEventsRiderQuery, useRiderAllClassesQuery } = RiderApi;
 
 export default RiderApi;

@@ -8,8 +8,9 @@ import StableSignup from "../pages/auth/signup/stable-signup";
 const NotFoundPage = lazy(() => import("../pages/404/index"));
 const Layout = lazy(() => import("./../components/molecules/layout"));
 const RiderEvents = lazy(() => import("../pages/rider/rider-all-events"));
-const RiderEventRegistration = lazy(() => import("../pages/rider/rider-event-register"));
-const RiderClassRegistration = lazy(() => import("../pages/rider/rider-class-registration"));
+const RiderEventClassRegistration = lazy(() =>
+  import("../pages/rider/rider-event-class-registration")
+);
 
 const RiderRoutes = () => {
   return (
@@ -49,19 +50,10 @@ const RiderRoutes = () => {
             />
             <Route
               exact
-              path={ROUTE_PATH.RIDER.EVENT_REGISTER}
+              path={ROUTE_PATH.RIDER.EVENT_CLASS_REGISTER}
               element={
                 <Layout>
-                  <RiderEventRegistration />
-                </Layout>
-              }
-            />
-            <Route
-              exact
-              path={ROUTE_PATH.RIDER.CLASS_REGISTER}
-              element={
-                <Layout>
-                  <RiderClassRegistration />
+                  <RiderEventClassRegistration />
                 </Layout>
               }
             />

@@ -15,9 +15,9 @@ export const ROUTE_PATH = {
   RIDER: {
     HORSE_REGISTER: "/rider-horse-register",
     STABLE_REGISTER: "/rider-stable-register",
+
     ALL_EVENTS: "/rider-all-events",
-    EVENT_REGISTER: "/rider-event-register",
-    CLASS_REGISTER: "/rider-class-register",
+    EVENT_CLASS_REGISTER: "/rider-event-class-register",
   },
 };
 

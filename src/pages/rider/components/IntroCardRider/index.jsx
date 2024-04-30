@@ -23,7 +23,7 @@ const IntroCardRider = () => {
   if (data.user.stableId === null) return navigate(ROUTE_PATH.RIDER.STABLE_REGISTER);
   return (
     <Div sx={{ p: 2, background: "#BEC9D9" }}>
-      <Appheading>Rider Name</Appheading>
+      <Appheading>Rider Details</Appheading>
       <Div height={30} />
       <Div sx={{ display: "flex", alignItems: "center" }}>
         <img src={data?.user.image} alt="" />

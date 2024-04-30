@@ -43,7 +43,7 @@ const RiderEvents = () => {
   }
 
   const handleRegisterEvent = () => {
-    alert("asd");
+    navigate(ROUTE_PATH.RIDER.EVENT_CLASS_REGISTER);
   };
   return (
     <Div>
