@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AddIcon from "@mui/icons-material/Add";
 import Title from "../../../../components/molecules/title";
-import { TextField } from "@mui/material";
+import { TextField, Select, MenuItem } from "@mui/material";
 import { AppButton } from "../../../../components/atoms/AppButton";
 import Div from "../../../../components/atoms/Div";
 import { useAddClassMutation } from "../../../../redux/services/supervisor-apis";
@@ -36,7 +37,7 @@ export default function ClassModal({ eventId }) {
   const handleSubmit = async () => {
     if (!className) return toast.warn("Please enter a class name");
     if (!classStartTime) return toast.warn("Please enter a class start time");
-    if (!type) return toast.warn("Please enter a class type");
+    if (!type) return toast.warn("Please select a class type");
 
     setIsLoading(true);
 
@@ -95,12 +96,17 @@ export default function ClassModal({ eventId }) {
             fullWidth
           />
           <Div height={15} />
-          <TextField
+          <Select
             value={type}
             onChange={(e) => setType(e.target.value)}
             label="Class Type"
             fullWidth
-          />
+          >
+            <MenuItem value="DRESSAGE">DRESSAGE</MenuItem>
+            <MenuItem value="SHOW_JUMPING">SHOW_JUMPING</MenuItem>
+            <MenuItem value="ENDURANCE">ENDURANCE</MenuItem>
+            <MenuItem value="EVENTING">EVENTING</MenuItem>
+          </Select>
           <Div height={30} />
           <AppButton onClick={handleSubmit} sx={{ width: "100%" }}>
             {isLoading ? <Loader /> : "Submit"}

@@ -3,7 +3,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
-import { Appfont } from "../../utils/theme/typo";
+import { AppMessage, Appfont } from "../../utils/theme/typo";
 import { ROUTE_PATH } from "../../utils/route-paths";
 import { AppButton } from "../../components/atoms/AppButton";
 import { alpha } from "../../utils/theme/colors";
@@ -21,23 +21,24 @@ const AllEvents = () => {
     navigate(ROUTE_PATH.SUPERVISOR.CREATE_EVENT);
   };
   if (isLoading) return <div>Loading...</div>;
+  console.log(data.events);
   return (
     <Div>
       <IntroCard />
       <Title bg={"#1B2A41"}>Created Evented</Title>
       {error && (
         <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>
-          Couldnt Load Event Please try again later{" "} ⚠️
+          Couldnt Load Event Please try again later ⚠️
         </Appfont>
       )}
-      {data &&
-        data.events.map((items, id) => {
-          return (
-            <div key={id}>
-              <EventCard {...items} />
-            </div>
-          );
-        })}
+      {data?.events?.length === 0 && <AppMessage>No Events founds</AppMessage>}
+      {data?.events.map((items, id) => {
+        return (
+          <div key={id}>
+            <EventCard {...items} />
+          </div>
+        );
+      })}
 
       <Div sx={{ p: 3 }}>
         <Div sx={{ display: "flex ", alignItems: "center" }}>

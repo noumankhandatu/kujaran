@@ -11,6 +11,7 @@ export const RiderApi = createApi({
         url: "/users/rider/me",
         method: "GET",
       }),
+      providesTags: ["SupervisorApi"],
     }),
     getAllEventsRider: builder.query({
       query: () => ({
@@ -24,10 +25,32 @@ export const RiderApi = createApi({
         url: "/competition/classes/getAll",
         method: "GET",
       }),
+      providesTags: ["SupervisorApi"],
+    }),
+    getEventById: builder.mutation({
+      query: (id) => ({
+        url: `/supervisor/events/getById/${id}`,
+        method: "GET",
+      }),
+      invalidatesTags: ["SupervisorApi"],
+    }),
+    createRegistration: builder.mutation({
+      query: (payload) => ({
+        url: `/create/registrations`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["SupervisorApi"],
     }),
   }),
 });
 
-export const { useGetRiderQuery, useGetAllEventsRiderQuery, useRiderAllClassesQuery } = RiderApi;
+export const {
+  useGetRiderQuery,
+  useGetAllEventsRiderQuery,
+  useRiderAllClassesQuery,
+  useGetEventByIdMutation,
+  useCreateRegistrationMutation,
+} = RiderApi;
 
 export default RiderApi;

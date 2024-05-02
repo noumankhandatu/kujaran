@@ -18,6 +18,7 @@ export const ROUTE_PATH = {
 
     ALL_EVENTS: "/rider-all-events",
     EVENT_CLASS_REGISTER: "/rider-event-class-register",
+    EVENT_CLASS_DETAILS: "/rider-event-class-details",
   },
 };
 

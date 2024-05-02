@@ -4,7 +4,7 @@ import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 import IntroCard from "./components/IntroCard";
 import { useGetEventClassAndSponsorsQuery } from "../../redux/services/supervisor-apis";
-import { Appfont } from "../../utils/theme/typo";
+import { AppMessage, Appfont } from "../../utils/theme/typo";
 import { useNavigate } from "react-router-dom";
 import AppDateFormatter from "../../components/hooks/DateFormatter";
 import SponsorModal from "./components/modals/sponsorModal";
@@ -33,12 +33,10 @@ const SelectedEvent = () => {
       <EventCard />
 
       <Title bg="#1B2A41">Event Sponsors</Title>
-      {eventData?.event?.sponsors.length === 0 && (
-        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Sponsors Found</Appfont>
-      )}
+      {eventData?.event?.sponsors.length === 0 && <AppMessage>No Sponsors Found</AppMessage>}
       {eventData?.event?.sponsors.length !== 0 && (
         <Div
-          sx={{ display: "flex", gap: 2, m: 2, justifyContent: "space-between", flexWrap: "wrap" }}
+          sx={{ display: "flex", gap: 2, m: 2, justifyContent: "flex-start", flexWrap: "wrap" }}
         >
           {eventData &&
             eventData?.event?.sponsors.map((items, id) => {
@@ -54,6 +52,7 @@ const SelectedEvent = () => {
 
       <SponsorModal eventId={id} />
       <Title bg="#1B2A41">Technical Handbook</Title>
+      <AppMessage>Coming Soon</AppMessage>
       <Title bg={"#D9D9D9"} color="black">
         <span style={{ display: "flex", alignItems: "center" }}>
           <AddIcon sx={{ color: "green" }} />
@@ -75,9 +74,7 @@ const ClassSchedule = ({ getClassses, id }) => {
   };
   return (
     <>
-      {getClassses?.CompetitionClass.length === 0 && (
-        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Classes Found</Appfont>
-      )}
+      {getClassses?.CompetitionClass.length === 0 && <AppMessage>No Classes Found</AppMessage>}
       {getClassses?.CompetitionClass.length !== 0 && (
         <TableContainer component={Paper}>
           <Table>

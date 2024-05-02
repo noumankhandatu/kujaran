@@ -55,7 +55,7 @@ const HorseSignup = () => {
       const response = await createHorse(formData);
       if (response.data.success === true || response.status === 200) {
         toast.success(response.data.message);
-        navigate("/");
+        navigate("/rider-stable-register");
       }
     } catch (error) {
       console.error("Signup Error:", error);

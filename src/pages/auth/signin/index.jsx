@@ -21,12 +21,12 @@ const SignInPage = () => {
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false); 
 
   // fns
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading to true when form is being submitted
+    setIsLoading(true); 
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}/user/logIn`,
@@ -44,6 +44,7 @@ const SignInPage = () => {
           })
         );
         navigate(`/`);
+        window.location.reload();
       }
     } catch (error) {
       console.error("Sign-in Error:", error);

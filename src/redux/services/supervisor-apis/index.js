@@ -41,6 +41,7 @@ export const SupervisorApi = createApi({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["SupervisorApi"],
     }),
     addClass: builder.mutation({
       query: (payload) => ({

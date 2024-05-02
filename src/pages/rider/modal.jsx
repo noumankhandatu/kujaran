@@ -1,4 +1,4 @@
-import * as React from "react";
+/* eslint-disable react/prop-types */
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Appfont } from "../../utils/theme/typo";
@@ -17,8 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function RiderModel() {
-  const [open, setOpen] = React.useState(true);
+export default function RiderModel({ setOpen, open }) {
   const handleClose = () => setOpen(false);
 
   return (

@@ -2,43 +2,74 @@
 import { Appfont } from "../../utils/theme/typo";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
-import { alpha } from "../../utils/theme/colors";
-import { Link } from "react-router-dom";
-import { ROUTE_PATH } from "../../utils/route-paths";
+import { useParams } from "react-router-dom";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { AppButton } from "../../components/atoms/AppButton";
 import IntroCardRider from "./components/IntroCardRider";
-import { useGetRiderQuery, useRiderAllClassesQuery } from "../../redux/services/rider";
+import {
+  useCreateRegistrationMutation,
+  useGetRiderQuery,
+  useRiderAllClassesQuery,
+} from "../../redux/services/rider";
 import { useState } from "react";
+import EventCard from "./components/EventCard";
+import Loader from "../../components/atoms/Loader";
+import { toast } from "react-toastify";
 
 const RiderEventClassRegistration = () => {
+  const { id } = useParams();
   const { data } = useRiderAllClassesQuery();
   const { data: myData } = useGetRiderQuery();
-
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedHorse, setSelectedHorse] = useState("");
+  const [createRegistration, { isLoading }] = useCreateRegistrationMutation();
+
+  // states
   const [selectStartDate, setselectStartDate] = useState("");
   const [selectEndDate, setselectEndDate] = useState("");
+  const [selectClassId, setselectClassId] = useState("");
+  const [selectHorseId, setselectHorseId] = useState("");
   const handleChangeClass = (event) => {
     const selectedClassName = event.target.value;
     setSelectedClass(selectedClassName);
     const selectedClassData = data?.data.find((item) => item.className === selectedClassName);
-    if (selectedClassData) {
-      alert(`Selected class ID: ${selectedClassData.id}`);
+    if (selectedClassData.id) {
+      setselectClassId(selectedClassData.id);
     }
   };
 
   const handleChangeHorse = (event) => {
     const selectedHorseName = event.target.value;
-    setSelectedHorse(selectedHorseName);
-    alert(`Selected horse: ${selectedHorseName}`);
+    const selectedHorse = myData.user.horses.find((horse) => horse.name === selectedHorseName);
+    if (selectedHorse) {
+      const selectedHorseId = selectedHorse.id;
+      setselectHorseId(selectedHorseId);
+      setSelectedHorse(selectedHorseName);
+    }
   };
-
+  const handleEventClassRegistration = async () => {
+    const payload = {
+      horseId: selectHorseId,
+      classId: selectClassId,
+      eventId: parseInt(id),
+      stabling: myData.user.stableId,
+      paymentStatus: "PAID",
+      startDate: new Date(selectStartDate).toISOString(),
+      endDate: new Date(selectEndDate).toISOString(),
+    };
+    const response = await createRegistration(payload);
+    if (response.data.success === true) {
+      return toast.success("Registration successfull");
+    }
+    if (response.error.status === 400) {
+      return toast.warn(response.error.data.error);
+    }
+  };
   return (
     <Div>
       <IntroCardRider />
-      <Title bg={"#1B2A41"}>Registered</Title>
       <EventCard />
+      <Title bg={"#1B2A41"}>Registering</Title>
       <Div sx={{ m: 2 }}>
         <Appfont>Select a Class</Appfont>
         <Select
@@ -107,38 +138,16 @@ const RiderEventClassRegistration = () => {
       >
         <Appfont>Total</Appfont>
         <Appfont>Payment</Appfont>
-        <Link to={ROUTE_PATH.ALL_EVENT_JUDGE}>
-          <AppButton sx={{ background: "green" }}>Payment</AppButton>
-        </Link>
+
+        {!isLoading && (
+          <AppButton onClick={handleEventClassRegistration} sx={{ background: "green" }}>
+            Payment
+          </AppButton>
+        )}
+        {isLoading && <Loader />}
       </Div>
     </Div>
   );
 };
 
 export default RiderEventClassRegistration;
-
-const EventCard = () => {
-  return (
-    <Link to={""}>
-      <Div
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          background: alpha,
-          cursor: "pointer",
-          justifyContent: "space-between",
-        }}
-      >
-        <Div sx={{ display: "flex", gap: 2 }}>
-          <img src="/eventlogo.png" alt="" />
-          <Div>
-            <Appfont>Event Name</Appfont>
-            <Appfont>Event Location</Appfont>
-            <Appfont>Event Startdate - Event Enddate </Appfont>
-          </Div>
-        </Div>
-      </Div>
-    </Link>
-  );
-};

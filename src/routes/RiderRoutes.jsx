@@ -4,6 +4,7 @@ import { ROUTE_PATH } from "../utils/route-paths";
 import SuspenseLoader from "../components/molecules/suspenseLoader";
 import HorseSignup from "../pages/auth/signup/horse-signup";
 import StableSignup from "../pages/auth/signup/stable-signup";
+import RegisteredEventDetails from "../pages/rider/registered-event-details";
 
 const NotFoundPage = lazy(() => import("../pages/404/index"));
 const Layout = lazy(() => import("./../components/molecules/layout"));
@@ -50,13 +51,23 @@ const RiderRoutes = () => {
             />
             <Route
               exact
-              path={ROUTE_PATH.RIDER.EVENT_CLASS_REGISTER}
+              path={`${ROUTE_PATH.RIDER.EVENT_CLASS_REGISTER}/:id`}
               element={
                 <Layout>
                   <RiderEventClassRegistration />
                 </Layout>
               }
             />
+            <Route
+              exact
+              path={`${ROUTE_PATH.RIDER.EVENT_CLASS_DETAILS}/:id`}
+              element={
+                <Layout>
+                  <RegisteredEventDetails />
+                </Layout>
+              }
+            />
+
             <Route exact path={"*"} element={<NotFoundPage />} />
           </Routes>
         </Router>

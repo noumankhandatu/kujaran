@@ -20,8 +20,8 @@ const IntroCard = () => {
           <Appfont style={{ textTransform: "capitalize", fontWeight: 700, fontSize: 30 }}>
             {data?.user.name}
           </Appfont>
-          <Appfont sx={{ mt: 3, mb: 1 }}>{data?.user.dob}</Appfont>
-          <Appfont>{data?.user.nationality}</Appfont>
+          <Appfont sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}>{data?.user.dob}</Appfont>
+          <Appfont sx={{ textTransform: "capitalize" }}>{data?.user.nationality}</Appfont>
         </Div>
       </Div>
     </Div>

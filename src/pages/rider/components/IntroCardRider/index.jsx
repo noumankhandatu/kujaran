@@ -26,13 +26,15 @@ const IntroCardRider = () => {
       <Appheading>Rider Details</Appheading>
       <Div height={30} />
       <Div sx={{ display: "flex", alignItems: "center" }}>
-        <img src={data?.user.image} alt="" />
+        <img src={data?.user.image} alt="" style={{ width: 200, height: 200 }} />
         <Div sx={{ ml: 2 }}>
           <Appfont style={{ textTransform: "capitalize", fontWeight: 700, fontSize: 30 }}>
             {data?.user.name}
           </Appfont>
-          <Appfont sx={{ mt: 3, mb: 1 }}>{data?.user.nationality}</Appfont>
-          <Appfont>{data?.user.gender}</Appfont>
+          <Appfont sx={{ mt: 3, mb: 1, textTransform: "capitalize" }}>
+            {data?.user.nationality}
+          </Appfont>
+          <Appfont sx={{ textTransform: "capitalize" }}>{data?.user.gender}</Appfont>
         </Div>
       </Div>
     </Div>
