@@ -1,21 +1,22 @@
 import { Link, useParams } from "react-router-dom";
 import Title from "../../components/molecules/title";
 import Div from "../../components/atoms/Div";
-import { Appfont } from "../../utils/theme/typo";
+import { AppMessage, Appfont } from "../../utils/theme/typo";
 import { ROUTE_PATH } from "../../utils/route-paths";
 import { AppButton } from "../../components/atoms/AppButton";
 import EventCard from "./components/EventCard";
-import { Avatar } from "@mui/material";
 import { useGetClassDetailsQuery } from "../../redux/services/supervisor-apis";
+import Apploader from "../../components/atoms/Apploader";
+import AppDateFormatter from "../../components/hooks/DateFormatter";
 
 const SelectedClass = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const classId = searchParams.get("selectclass");
   const { id } = useParams();
-  console.log(classId, "classId");
-  const { data } = useGetClassDetailsQuery({ eventId: id, classId: classId });
-  console.log(data?.classDetails, "classDetails");
+  const { data, isLoading } = useGetClassDetailsQuery({ eventId: id, classId: classId });
   // useGetClassByIdMutation
+
+  if (isLoading) return <Apploader />;
   return (
     <div>
       <EventCard />
@@ -26,7 +27,10 @@ const SelectedClass = () => {
         <Div>
           <Appfont>Class Name : {data?.classDetails?.className}</Appfont>
           <Appfont>Class Status : {data?.classDetails?.classStatus}</Appfont>
-          <Appfont>Class StartTime : {data?.classDetails?.classStartTime}</Appfont>
+          <Appfont>
+            Class StartTime :
+            <AppDateFormatter> {data?.classDetails?.classStartTime}</AppDateFormatter>
+          </Appfont>
           <Appfont>
             Class Number of Participants : {data?.classDetails?.participants.length}
           </Appfont>
@@ -39,27 +43,34 @@ const SelectedClass = () => {
       <AppButton>Result List</AppButton>
       <AppButton>Start Order</AppButton>
       {data?.classDetails?.participants.length === 0 && (
-        <Appfont sx={{ textAlign: "center", mt: 3, mb: 3 }}>No Participant&apos;s Found</Appfont>
+        <AppMessage>No Participants found</AppMessage>
       )}
       {data?.classDetails?.participants.length !== 0 && (
         <div>
-          <Div sx={{ p: 2 }}>
-            <img src="" alt="" />
-          </Div>
-
-          <Div sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
-            <Div sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Avatar />
-              <div>
-                <Appfont>Rider Name</Appfont>
-                <Appfont>Horse Name </Appfont>
-                <Appfont>Horse Number</Appfont>
-              </div>
-            </Div>
-            <div>
-              <Appfont>Estimated Starttime : xx.xx</Appfont>
+          {data?.classDetails?.participants.map((participant, index) => (
+            <div key={index}>
+              <Div
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  p: 2,
+                  background: "#ECECEC",
+                }}
+              >
+                <Div sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <img src="/threedot.png" alt="" />
+                  <div>
+                    <Appfont sx={{ textTransform: "capitalize" }}>{participant.userName}</Appfont>
+                    <Appfont>{participant.horseDetails.name}</Appfont>
+                    <Appfont>{participant.registrationId}</Appfont>
+                  </div>
+                </Div>
+                <div>
+                  <Appfont>Estimated Starttime : xx.xx</Appfont>
+                </div>
+              </Div>
             </div>
-          </Div>
+          ))}
         </div>
       )}
     </div>

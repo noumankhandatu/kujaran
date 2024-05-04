@@ -8,6 +8,7 @@ import { AppButton } from "../../components/atoms/AppButton";
 import IntroCardRider from "./components/IntroCardRider";
 import {
   useCreateRegistrationMutation,
+  useGetEventClassHorseQuery,
   useGetRiderQuery,
   useRiderAllClassesQuery,
 } from "../../redux/services/rider";
@@ -19,6 +20,8 @@ import { toast } from "react-toastify";
 const RiderEventClassRegistration = () => {
   const { id } = useParams();
   const { data } = useRiderAllClassesQuery();
+  const { data: classData } = useGetEventClassHorseQuery(id);
+
   const { data: myData } = useGetRiderQuery();
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedHorse, setSelectedHorse] = useState("");
@@ -48,11 +51,12 @@ const RiderEventClassRegistration = () => {
     }
   };
   const handleEventClassRegistration = async () => {
+    if (!selectStartDate || !selectEndDate) return toast.warn("Enter start and end date");
     const payload = {
       horseId: selectHorseId,
       classId: selectClassId,
       eventId: parseInt(id),
-      stabling: myData.user.stableId,
+      stabling: 1,
       paymentStatus: "PAID",
       startDate: new Date(selectStartDate).toISOString(),
       endDate: new Date(selectEndDate).toISOString(),
@@ -65,6 +69,7 @@ const RiderEventClassRegistration = () => {
       return toast.warn(response.error.data.error);
     }
   };
+
   return (
     <Div>
       <IntroCardRider />
@@ -80,12 +85,11 @@ const RiderEventClassRegistration = () => {
           required
         >
           {/* Map over data?.data to generate MenuItem components */}
-          {data &&
-            data.data.map((item) => (
-              <MenuItem key={item.id} value={item.className}>
-                {item.className}
-              </MenuItem>
-            ))}
+          {classData?.event.CompetitionClass.map((item) => (
+            <MenuItem key={item.id} value={item.className}>
+              {item.className}
+            </MenuItem>
+          ))}
         </Select>
         {/* Horse Select */}
         <Appfont>Select a Horse</Appfont>

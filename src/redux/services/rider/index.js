@@ -42,6 +42,13 @@ export const RiderApi = createApi({
       }),
       invalidatesTags: ["SupervisorApi"],
     }),
+    getEventClassHorse: builder.query({
+      query: (id) => ({
+        url: `/get/event/${id}/judge`,
+        method: "GET",
+      }),
+      providesTags: ["SupervisorApi"],
+    }),
   }),
 });
 
@@ -51,6 +58,7 @@ export const {
   useRiderAllClassesQuery,
   useGetEventByIdMutation,
   useCreateRegistrationMutation,
+  useGetEventClassHorseQuery,
 } = RiderApi;
 
 export default RiderApi;

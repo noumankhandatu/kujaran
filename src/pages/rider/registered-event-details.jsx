@@ -3,7 +3,7 @@ import { Appfont } from "../../utils/theme/typo";
 import Div from "../../components/atoms/Div";
 import Title from "../../components/molecules/title";
 import IntroCardRider from "./components/IntroCardRider";
-import { useGetRiderQuery } from "../../redux/services/rider";
+import { useGetEventClassHorseQuery, useGetRiderQuery } from "../../redux/services/rider";
 import EventCard from "./components/EventCard";
 import AppDateFormatter from "../../components/hooks/DateFormatter";
 import {
@@ -15,9 +15,16 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import Apploader from "../../components/atoms/Apploader";
+import { useParams } from "react-router-dom";
 
 const RegisteredEventDetails = () => {
-  const { data: myData } = useGetRiderQuery();
+  const { id } = useParams();
+  const { data: classData, isLoading } = useGetEventClassHorseQuery(id);
+  const { data: myUserData, isLoading: isLoadin } = useGetRiderQuery();
+
+  if (isLoading || isLoadin) return <Apploader />;
+  console.log(classData.event.CompetitionClass[0].className, "classData");
   return (
     <Div>
       <IntroCardRider />
@@ -37,25 +44,38 @@ const RegisteredEventDetails = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {myData?.user?.registrations.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>
-                      <Appfont>{item.class.className}</Appfont>
-                    </TableCell>
-                    <TableCell>
-                      <Appfont>{item.class.classStatus}</Appfont>
-                    </TableCell>
-                    <TableCell>
-                      <Appfont>{item.class.type}</Appfont>
-                    </TableCell>
-                    <TableCell>
-                      <AppDateFormatter>{item.class.createdAt}</AppDateFormatter>
-                    </TableCell>
-                    <TableCell>
-                      <AppDateFormatter>{item.class.endDate}</AppDateFormatter>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {classData.event.CompetitionClass.map((classItem, classIndex) => {
+                  // Check if className exists in registrations array
+                  const matchedRegistration = myUserData?.user?.registrations.find(
+                    (item) => item.class.className === classItem.className
+                  );
+
+                  // If there is a match, render the row
+                  if (matchedRegistration) {
+                    return (
+                      <TableRow key={classIndex}>
+                        <TableCell>
+                          <Appfont>{matchedRegistration.class.className}</Appfont>
+                        </TableCell>
+                        <TableCell>
+                          <Appfont>{matchedRegistration.class.classStatus}</Appfont>
+                        </TableCell>
+                        <TableCell>
+                          <Appfont>{matchedRegistration.class.type}</Appfont>
+                        </TableCell>
+                        <TableCell>
+                          <AppDateFormatter>{matchedRegistration.class.createdAt}</AppDateFormatter>
+                        </TableCell>
+                        <TableCell>
+                          <AppDateFormatter>{matchedRegistration.class.endDate}</AppDateFormatter>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  } else {
+                    // Render null if there is no match
+                    return null;
+                  }
+                })}
               </TableBody>
             </Table>
           </TableContainer>
@@ -63,7 +83,7 @@ const RegisteredEventDetails = () => {
 
         {/* Horse Select */}
         <Title>Registered Horses</Title>
-        {myData?.user?.horses.map((items, id) => {
+        {classData?.user?.horses.map((items, id) => {
           return (
             <Appfont sx={{ m: 2 }} key={id}>
               {items.name}
