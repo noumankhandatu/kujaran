@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { reduxAccesstoken, reduxRole } from "../redux/slices/auth";
 import { APP_ROLES } from "../utils/route-paths";
+import JudgeRoutes from "./JudgeRoutes";
 
 const PublicRoutes = lazy(() => import("./PublicRoutes"));
 const SupervisorRoutes = lazy(() => import("./SupervisorRoutes"));
@@ -24,9 +25,11 @@ const AppRouting = () => {
   return (
     <div>
       <Suspense fallback={<SuspenseLoader />}>
+        {(!authTokenValid || !appRole) && <PublicRoutes />}
+
         {authTokenValid && appRole === APP_ROLES.SUPERVISOR && <SupervisorRoutes />}
         {authTokenValid && appRole === APP_ROLES.RIDER && <RiderRoutes />}
-        {(!authTokenValid || !appRole) && <PublicRoutes />}
+        {authTokenValid && appRole === APP_ROLES.JUDGE && <JudgeRoutes />}
       </Suspense>
     </div>
   );

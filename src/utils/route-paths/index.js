@@ -20,10 +20,17 @@ export const ROUTE_PATH = {
     EVENT_CLASS_REGISTER: "/rider-event-class-register",
     EVENT_CLASS_DETAILS: "/rider-event-class-details",
   },
+
+  // JUDGE
+  JUDGE: {
+    ALL_EVENT: "/judge-all-events",
+    SELECT_EVENT: "/judge-select-events",
+  },
 };
 
 // App Roles
 export const APP_ROLES = {
   SUPERVISOR: "SUPERVISOR",
   RIDER: "RIDER",
+  JUDGE: "JUDGE",
 };

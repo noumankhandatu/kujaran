@@ -1,17 +1,15 @@
 import Apploader from "../../../components/atoms/Apploader";
 import Div from "../../../components/atoms/Div";
 import { useGetUserQuery } from "../../../redux/services/supervisor-apis";
-import { AppMessage, Appfont, Appheading } from "../../../utils/theme/typo";
+import { Appfont, Appheading } from "../../../utils/theme/typo";
 
 const IntroCard = () => {
   const { data, isLoading, isError } = useGetUserQuery();
-
   if (isLoading) return <Apploader />;
-  if (isError) return <AppMessage>Something Went Wrong</AppMessage>;
-
+  if (isError) return <>Error..</>;
   return (
     <Div sx={{ p: 2, background: "#BEC9D9" }}>
-      <Appheading>Supervisor</Appheading>
+      <Appheading>Judge</Appheading>
       <Div height={30} />
       <Div sx={{ display: "flex" }}>
         <img src={data?.user.image} alt="" style={{ height: 200, width: 200 }} />

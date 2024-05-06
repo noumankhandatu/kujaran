@@ -65,6 +65,20 @@ export const SupervisorApi = createApi({
       }),
       providesTags: ["SupervisorApi"],
     }),
+    getAllJudges: builder.query({
+      query: () => ({
+        url: "/supervisor/get/AllJudge",
+        method: "GET",
+      }),
+    }),
+    assignJudge: builder.mutation({
+      query: (payload) => ({
+        url: `/assign/events/judge`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["SupervisorApi"],
+    }),
   }),
 });
 
@@ -77,6 +91,8 @@ export const {
   useAddClassMutation,
   useGetEventClassAndSponsorsQuery,
   useGetClassDetailsQuery,
+  useGetAllJudgesQuery,
+  useAssignJudgeMutation,
 } = SupervisorApi;
 
 export default SupervisorApi;
