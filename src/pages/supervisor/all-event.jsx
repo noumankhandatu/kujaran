@@ -33,13 +33,15 @@ const AllEvents = () => {
         </Appfont>
       )}
       {data?.events?.length === 0 && <AppMessage>No Events founds</AppMessage>}
-      {data?.events.map((items, id) => {
-        return (
-          <div key={id}>
-            <EventCard {...items} />
-          </div>
-        );
-      })}
+      <Div sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+        {data?.events.map((items, id) => {
+          return (
+            <div key={id}>
+              <EventCard {...items} />
+            </div>
+          );
+        })}
+      </Div>
 
       <Div sx={{ p: 3 }}>
         <Div sx={{ display: "flex ", alignItems: "center" }}>

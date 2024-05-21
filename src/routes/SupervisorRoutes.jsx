@@ -45,7 +45,7 @@ const SupervisorRoutes = () => {
                   <SelectedEvent />
                 </Layout>
               }
-            />{" "}
+            />
             <Route
               exact
               path={`${ROUTE_PATH.SUPERVISOR.SELECT_CLASS}/:id`}

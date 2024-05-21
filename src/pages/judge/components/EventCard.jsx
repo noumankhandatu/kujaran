@@ -12,7 +12,6 @@ const EventCard = () => {
   const [getEventById, { isLoading }] = useGetEventByIdMutation();
 
   const [myData, setmyData] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
@@ -30,20 +29,19 @@ const EventCard = () => {
     fetchData();
   }, [id, getEventById]);
   if (isLoading || !myData) return <Loader />;
-
   return (
     <div>
       <Title bg="#1B2A41">Selected Event </Title>
       <Div sx={{ display: "flex", gap: 3, alignItems: "center" }}>
         <img src={myData.image} style={{ width: 200, height: 200 }} alt="" />
         <div>
-          <Appfont sx={{ textTransform: "capitalize", fontSize: 30, fontWeight: 600 }}>
+          <Appfont sx={{ textTransform: "capitalize", fontSize: 30, fontWeight: 600, mt: 1 }}>
             {myData.title}
           </Appfont>
-          <Appfont>{myData.description}</Appfont>
-          <Appfont>{myData.status}</Appfont>
-          <Appfont>{myData.location}</Appfont>
-          <Appfont>
+          <Appfont sx={{ mt: 1, fontSize: 17 }}>{myData.description}</Appfont>
+          <Appfont sx={{ mt: 1, fontSize: 17 }}>{myData.status}</Appfont>
+          <Appfont sx={{ mt: 1, fontSize: 17 }}>{myData.location}</Appfont>
+          <Appfont sx={{ mt: 1, fontSize: 17 }}>
             <AppDateFormatter date={myData.startDate} /> -
             <AppDateFormatter date={myData.endDate} />
           </Appfont>

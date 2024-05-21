@@ -17,11 +17,13 @@ const JudgeAllEvents = () => {
 
   if (isLoading) return <Apploader />;
   if (isError) return "Something went wrong";
+
+  console.log(data, 'data')
   return (
     <Div>
       <IntroCard />
       <Title bg={"#1B2A41"}>Assigned Events</Title>
-      {data?.user?.events?.length === 0 && <AppMessage>No Events founds</AppMessage>}
+      {data?.user?.event.length === 0 && <AppMessage>No Events Assigned</AppMessage>}
       {data?.user?.event.map((items, id) => {
         return (
           <div key={id}>
@@ -39,21 +41,22 @@ export default JudgeAllEvents;
 
 const EventCard = ({ title, image, startDate, endDate, location, id }) => {
   return (
-    <Div
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        background: alpha,
-        cursor: "pointer",
-        justifyContent: "space-between",
-      }}
-    >
-      <Link to={`${ROUTE_PATH.JUDGE.SELECT_EVENT}/${id}`}>
-        <Div sx={{ display: "flex", gap: 2 }}>
+    <Link to={`${ROUTE_PATH.JUDGE.SELECT_EVENT}/${id}`}>
+
+      <Div
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          background: alpha,
+          cursor: "pointer",
+          justifyContent: "space-between",
+        }}
+      >
+        <Div sx={{ display: "flex", gap: 2, alignItems: 'center' }}>
           <img style={{ width: 200, height: 200 }} src={image} alt="" />
           <Div>
-            <Appfont sx={{ textTransform: "capitalize" }}>{title}</Appfont>
+            <Appfont sx={{ textTransform: "capitalize", fontSize: 22 }}>{title}</Appfont>
             <Appfont sx={{ mb: 1, mt: 1 }}>{location}</Appfont>
             <Appfont>
               <AppDateFormatter date={startDate} /> -
@@ -61,10 +64,11 @@ const EventCard = ({ title, image, startDate, endDate, location, id }) => {
             </Appfont>
           </Div>
         </Div>
-      </Link>
-      <Div sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 2, mb: 2 }}>
-        <AppButton sx={{ mr: 2, background: "#afb200" }}>{"Judge"}</AppButton>
+        <Div sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 2, mb: 2 }}>
+          <AppButton sx={{ mr: 2, background: "#afb200" }}>{"Judge"}</AppButton>
+        </Div>
       </Div>
-    </Div>
+    </Link>
+
   );
 };

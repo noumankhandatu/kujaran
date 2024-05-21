@@ -103,9 +103,8 @@ export default function ClassModal({ eventId }) {
             fullWidth
           >
             <MenuItem value="DRESSAGE">DRESSAGE</MenuItem>
-            <MenuItem value="SHOW_JUMPING">SHOW_JUMPING</MenuItem>
+            <MenuItem value="SHOW_JUMPING">JUMPING</MenuItem>
             <MenuItem value="ENDURANCE">ENDURANCE</MenuItem>
-            <MenuItem value="EVENTING">EVENTING</MenuItem>
           </Select>
           <Div height={30} />
           <AppButton onClick={handleSubmit} sx={{ width: "100%" }}>

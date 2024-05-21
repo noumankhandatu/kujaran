@@ -61,13 +61,11 @@ const RiderEventClassRegistration = () => {
       startDate: new Date(selectStartDate).toISOString(),
       endDate: new Date(selectEndDate).toISOString(),
     };
-    const response = await createRegistration(payload);
-    if (response.data.success === true) {
-      return toast.success("Registration successfull");
-    }
-    if (response.error.status === 400) {
-      return toast.warn(response.error.data.error);
-    }
+    const response = await createRegistration(payload)
+    console.log(response, 'data')
+    if (response?.error?.data?.success === false) return toast.warn(response?.error?.data?.error)
+    if (response?.data?.success === true) return toast.success("Registration successfull");
+    if (response?.error?.status === 400) return toast.warn(response?.error?.data?.error);
   };
 
   return (

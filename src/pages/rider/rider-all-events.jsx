@@ -53,6 +53,7 @@ const RiderEvents = () => {
   const handleModel = () => {
     setshowModel(true);
   };
+
   return (
     <Div>
       {showModel && <RiderModel setOpen={setshowModel} open={showModel} />}
@@ -67,10 +68,10 @@ const RiderEvents = () => {
 
       {/* UN REGISTERED EVENTS */}
       <Title bg={"#1B2A41"}> All Events</Title>
-      {unregisteredEvents.length === 0 && <AppMessage>No Events Founds</AppMessage>}
-      {unregisteredEvents.length !== 0 && (
+      {data?.events.length === 0 && <AppMessage>No Events Founds</AppMessage>}
+      {data?.events.length !== 0 && (
         <>
-          {unregisteredEvents.map((items, id) => {
+          {data.events.map((items, id) => {
             return <RegisteringCard {...items} key={id} btnText={"Registered"} bg={"green"} />;
           })}
         </>

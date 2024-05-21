@@ -25,6 +25,8 @@ export const ROUTE_PATH = {
   JUDGE: {
     ALL_EVENT: "/judge-all-events",
     SELECT_EVENT: "/judge-select-events",
+    SELECT_CLASS: "/judge-select-classs",
+
   },
 };
 

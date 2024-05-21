@@ -7,6 +7,7 @@ const NotFoundPage = lazy(() => import("../pages/404/index"));
 const Layout = lazy(() => import("./../components/molecules/layout"));
 import JudgeAllEvents from "./../pages/judge/AllEvents";
 import SelectedEvent from "../pages/judge/selectEvent";
+import SelectClassJudge from "../pages/judge/selectClass";
 
 const JudgeRoutes = () => {
   return (
@@ -26,13 +27,22 @@ const JudgeRoutes = () => {
                 }
               />
             ))}
-
             <Route
               exact
               path={`${ROUTE_PATH.JUDGE.SELECT_EVENT}/:id`}
               element={
                 <Layout>
                   <SelectedEvent />
+                </Layout>
+              }
+            />
+
+            <Route
+              exact
+              path={`${ROUTE_PATH.JUDGE.SELECT_CLASS}/:id`}
+              element={
+                <Layout>
+                  <SelectClassJudge />
                 </Layout>
               }
             />

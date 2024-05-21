@@ -13,8 +13,8 @@ import { toast } from "react-toastify";
 
 const statusOptions = [
   { value: "LIVE", label: "LIVE" },
-  //   { value: "UPCOMING", label: "UPCOMING" },
-  //   { value: "ENDED", label: "ENDED" },
+  { value: "UPCOMING", label: "UPCOMING" },
+  { value: "ENDED", label: "ENDED" },
 ];
 
 const CreateEvent = () => {
@@ -30,9 +30,7 @@ const CreateEvent = () => {
   // Mutation hook for creating an event
   const [createEvent, { isLoading, isError }] = useCreateEventMutation();
 
-  if (isError) {
-    return <>Something went wrong please try again later</>;
-  }
+
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
@@ -140,6 +138,7 @@ const CreateEvent = () => {
           {isLoading && <Loader />}
           {!isLoading && <AppButton type="submit">Create</AppButton>}
         </form>
+        {isError && <>Something went wrong try again please</>}
       </Div>
       <Div height={100} />
     </Div>
